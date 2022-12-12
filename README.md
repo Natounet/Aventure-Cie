@@ -19,3 +19,11 @@ Tâches a réaliser
 - [ ]     1 - Formulaire pour créer le personnage
 - [ ]     2 - Export des caractéristiques en format PDF
 - [ ] : Mise en place de la création des PNJ Aléatoires
+
+
+Choix des technologies : 
+  - BDD : Mysql
+  - FRONT : Svelte
+  - BACK : FastAPI
+ 
+Docker puis Google Cloud

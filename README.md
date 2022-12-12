@@ -11,6 +11,7 @@ Tâches a réaliser
 - [ ] : Mettre en place une recherche de fiche de personnage dans la base de données :
 - [ ]     1 - par ordre alphabétique
 - [ ]     2 - par catégories
+- [ ]     3 - Par nom
 - [ ] : Mise en place de l'annuaire
 - [ ]     1 - Affichage des élements de chaques catégories
 - [ ]     3 - Ajout de le posibilité de clicker sur un élement pour voir plus de détails

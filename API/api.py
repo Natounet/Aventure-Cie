@@ -1,3 +1,6 @@
+#encoding:utf-8
+
+
 from fastapi import FastAPI
 import json
 
@@ -15,7 +18,7 @@ with open('jsonSchemas/categoriesSchema.json','r') as f:
     
 def log(chaine: str) -> None:
     
-    with open('APIlog.txt','a') as file:
+    with open('APIlog.txt','a',encoding='utf-8') as file:
         file.write(f"{chaine}\n")
         
     
@@ -42,63 +45,49 @@ async def creerDon(don: Don):
 
 @app.post("/ajout/arme")
 async def creerArme(arme: Arme):
-    """ Route permettant de créer une arme dans la base de données"""
-    
+    """ Route permettant de créer une arme dans la base de données
+
+        Attributs arme : \n
+            * nom: str # Nom de l'arme
+            * description: Union[str, None] # Description de l'arme, peut être nul
+            * prix: Union[float, None] # Prix de l'arme, peut être nul
+            * critique: int # mutliplicateur de coûts critiques
+            * portee: int # Portée en mètres de l'arme
+            * degats: str # Quels dés de dégats ( ex: 2 D8)
+            * poids: float # Poids de l'arme en kilo
+            * armure: int # Bonus/Malus d'armure
+            * caracteristique: str # Caractéristique de l'arme ( ex : Puissance )
+            * categories: list # Catégorise SOUS LA FORME D'UN JSON
+            * nomBalise: Union[str, None] # NomBalise du don qu'il possède si existant ( peut être nul)
+ 
+
+    """
+    # Néttoyage des chaines
+
     arme.nom = sanitizeChaine(arme.nom)
+    arme.caracteristique = sanitizeChaine(arme.caracteristique)
     
-    ### Vérification du nom ###
-    
-    if(not verificationNom(arme.nom)):
-        return "Le nom est invalide."
-    
-    # Description peut être null
+    # Description peut être null / pas besoin d'être verifiée si nettoyée
     if arme.description is not None:
         arme.description = sanitizeChaine(arme.description)
-    
-    # Prix
-    if arme.prix is not None:
-        if arme.prix == 0:
-            arme.prix = None
-        else:
-            if(not verificationPrix(arme.prix)):
-                return "Il y a un problème dans le prix."
-    
 
-    # Critique
+    # Nom balise peut être null
+    if arme.nomBalise is not None:
+        arme.nomBalise = sanitizeChaine(arme.nomBalise)
+
+    arme.degats = sanitizeChaine(arme.degats)
+
+
+    # Vérification des attributs
+
+    # messageErreur est une liste des erreurs
+    messageErreur = verifications(nom=arme.nom, prix= arme.prix, critique=arme.critique, portee=arme.portee, degats=arme.degats, poids=arme.poids, armure=arme.armure, caracteristique=arme.caracteristique,nomBalise=arme.nomBalise)
     
-    if(not verifiationCritique(arme.critique)):
-        return "Il y a un problème de multiplicateur de critique."
     
-    # Portee
-    
-    if(not verificationPortee(arme.portee)):
-        return "Il y a un problème dans la valeur de portée."
-    
-    # Degats
-    
-    if(not verificationDegats(arme.degats)):
-        return "Il y a un problème dans la valeur de dégats."
-    
-    # Poids
-    
-    if(not verificationPoids(arme.poids)):
-        return "Il y a un problème dans le poids."
-    
-    # Armure
-    
-    if(not verificationArmure(arme.armure)):
-        return "Il y a un problème dans la valeur de l'armure."
-    
-    # Caracteristique
-    
-    arme.caracteristique = arme.caracteristique.strip()
-    if(not verificationCaracteristique(arme.caracteristique)):
-        return "La caractéristique n'est pas valide."
-    
-    # Catégories
+    # Vérification des catégories d'arme
     
     if(not schemaValide(arme.categories, categoriesSchema)):
-        return "Les catégories entrées ne sont pas valides."
+        messageErreur.append("Les catégories entrées ne sont pas valides.")
     
     
     # Implémenter fonction pour vérifier si nomBalise existe dans la BDD
@@ -107,18 +96,27 @@ async def creerArme(arme: Arme):
     # Creation de l'arme dans la BDD
     
     
+    # En cas d'erreur
+    if messageErreur != []:
+        return messageErreur
     
+    
+
     
     log(f"Nom de l'arme : {arme.nom}")
     log(f"Description de l'arme : {arme.description}")
     log(f"Prix de l'arme : {arme.prix}")
     log(f"Critique de l'arme : {arme.critique}")
     log(f"Portée de l'arme : {arme.portee}")
-    log(f"Dégats de  l'arme : {arme.degat}")
+    log(f"Dégats de  l'arme : {arme.degats}")
     log(f"Poids de l'arme : {arme.poids}")
     log(f"Armure de l'arme : {arme.armure}")
     log(f"Caracteristique de l'arme : {arme.caracteristique}")
     log(f"Catégories de l'arme : {str(arme.categories)}")
     log(f"")
+
+    # Creation de l'arme dans la BDD
+
+
 
     return "L'arme à bien été créée."

@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS fichePersonnage(
     nom varchar(100) NOT NULL, -- Nom du personnage / Monstre
     langues JSON NOT NULL, -- langues parlées voir persoLangue.json
     taille int NOT NULl, -- Taille en centimètres
-    poids int NOT NULL, -- Poids en kilogrammes
+    poids float NOT NULL, -- Poids en kilogrammes
+    age int NOT NULL, -- Age ( entre 8 et 600 ans)
+    sexe varchar(20) NOT NULL, -- Peuple du personnage
     niveau int NOT NULL, -- Niveau de montre / personnage
     biome varchar(100) NOT NULL, -- Biome
     caracteristiques JSON NOT NULL, -- Caractéristiques sous forme de JSON, voir persoCara.json
@@ -93,8 +95,8 @@ CREATE TABLE IF NOT EXISTS fichePersonnage(
 {
     "__comment":"Dons",
     "dons":[
-        "nomDon":"idDon",
-        "nomDon2":"idDon2",
+        "nomBalise1",
+        "nomBalise2"
     ]
 }
 

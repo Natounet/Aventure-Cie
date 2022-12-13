@@ -1,0 +1,11 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Categories",
+    "description": "Schema for validating categories",
+    "type": "array",
+    "items": {
+        "type": "string"
+    },
+    "minItems": 1,
+    "uniqueItems": true
+}

@@ -1,0 +1,33 @@
+Nom de l'arme : Epee de damocles
+Description de l'arme : None
+Prix de l'arme : 12.0
+Critique de l'arme : 3
+Portée de l'arme : 5
+Dégats de  l'arme : string
+Poids de l'arme : 0.0
+Armure de l'arme : 0
+Caracteristique de l'arme : finesse
+Catégories de l'arme : ['puissance', 'categorie2']
+
+Nom de l'arme : Epee de damocles
+Description de l'arme : None
+Prix de l'arme : 12.0
+Critique de l'arme : 3
+Portée de l'arme : 5
+Dégats de  l'arme : 2D8
+Poids de l'arme : 0.0
+Armure de l'arme : 0
+Caracteristique de l'arme : finesse
+Catégories de l'arme : ['puissance', 'categorie2']
+
+Nom de l'arme : Epee de damocles
+Description de l'arme : None
+Prix de l'arme : None
+Critique de l'arme : 3
+Portée de l'arme : 5
+Dégats de  l'arme : 2D8
+Poids de l'arme : 0.0
+Armure de l'arme : 0
+Caracteristique de l'arme : finesse
+Catégories de l'arme : ['puissance', 'categorie2']
+

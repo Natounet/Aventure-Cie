@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS armes(
     -- Caractéristiques de l'arme
     critique int not null, -- multiplicateur de coup critique ? 
     portee int not null, -- portée de l'arme en metres
-    degat varchar(100) not null, -- dégat de l'arme ( 2x D8 )
+    degats varchar(100) not null, -- dégat de l'arme ( 2x D8 )
     poids float not null, -- poids de l'arme  en kilos
     armure int not null, -- points d'armure apportée par l'arme
 

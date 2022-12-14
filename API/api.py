@@ -1,13 +1,11 @@
 #encoding:utf-8
-
-
 from fastapi import FastAPI
 import json
 
 from verifications import *
 from classes import *
 import bleach
-
+from datetime import datetime
 app = FastAPI()
 
    
@@ -22,8 +20,6 @@ def log(chaine: str) -> None:
         file.write(f"{chaine}\n")
         
     
-
-
 def sanitizeChaine(chaine: str) -> str:
     """ Fonction qui sanitize une chaine en utilisant le module bleach
         Retourne la chaine sanitized """
@@ -32,6 +28,11 @@ def sanitizeChaine(chaine: str) -> str:
     return bleach.clean(chaine,strip=True)
 
 
+def premiereLettreMajuscule(chaine: str) -> str:
+    """ Fonction qui retourne une chaine avec seulement la première lettre en majuscule
+        ex: "bOnJOUr -> Bonjour"""
+        
+    return chaine.capitalize()
 
 
 ### FONCTIONS DE VERIFICATION
@@ -41,7 +42,55 @@ def sanitizeChaine(chaine: str) -> str:
 
 @app.post("/ajout/don")
 async def creerDon(don: Don):
-    return don
+    """ Route permettant la création d'un don dans la base de données
+    
+        Attributs d'un don : \n
+            *nomBalise: str #nom Unique du don pour le référencer
+            *nom: str # Nom du don descriptif
+            *caracteristique: str # ex Puissance
+            *histoire: [str,None] # Histoire du don
+        """
+        
+    ### Néttoyage des chaines ###
+    
+    don.nomBalise = bleach.clean(don.nomBalise)
+    don.nom = bleach.clean(don.nom)
+    don.caracteristique = bleach.clean(don.caracteristique).capitalize()
+    don.histoire = bleach.clean(don.histoire)
+    
+    
+    ### Vérifications des autres attributs ###
+    messageErreur = verifications(nom=don.nom,caracteristique=don.caracteristique)
+    
+    if don.histoire is not None:
+        if(not verificationTailleChaine(don.histoire,0,1000)):
+            messageErreur.append("La taille de l'histoire est trop élevée")
+    
+    ### Vérification que nomBalise n'est pas présent dans la BDD ###
+
+    
+    # Si il y a des erreurs
+    if messageErreur != []:
+        return messageErreur
+    
+    # Si pas d'érreurs
+    
+    
+    ### LOG DU DON ###
+    log(f"Creation d'un don - {datetime.now().strftime('%d/%m/%Y %X')}")
+    log(f"NomBalise du don : {don.nomBalise}")
+    log(f"Nom du don : {don.nom}")
+    log(f"Caractéristique du don : {don.caracteristique}")
+    log(f"Histoire du don : {don.histoire}")
+    log(f"")
+
+    
+    
+    
+    return "Le don a été crée."
+    
+        
+    
 
 @app.post("/ajout/arme")
 async def creerArme(arme: Arme):
@@ -62,10 +111,10 @@ async def creerArme(arme: Arme):
  
 
     """
-    # Néttoyage des chaines
+    #### Néttoyage des chaines ####
 
     arme.nom = sanitizeChaine(arme.nom)
-    arme.caracteristique = sanitizeChaine(arme.caracteristique)
+    arme.caracteristique = sanitizeChaine(arme.caracteristique).capitalize()
     
     # Description peut être null / pas besoin d'être verifiée si nettoyée
     if arme.description is not None:
@@ -78,16 +127,33 @@ async def creerArme(arme: Arme):
     arme.degats = sanitizeChaine(arme.degats)
 
 
-    # Vérification des attributs
+    #### Vérification des attributs ####
 
     # messageErreur est une liste des erreurs
     messageErreur = verifications(nom=arme.nom, prix= arme.prix, critique=arme.critique, portee=arme.portee, degats=arme.degats, poids=arme.poids, armure=arme.armure, caracteristique=arme.caracteristique,nomBalise=arme.nomBalise)
     
+    # Vérification du JSON catégories
+
+    if(not schemaValide(arme.categories, categoriesSchema)):
+        messageErreur.append("Les catégories entrées ne sont pas valides.")
+    
+    # Formattage du nom des catégories
+    for i in range(len(arme.categories)):
+        arme.categories[i] = arme.categories[i].capitalize()
     
     # Vérification des catégories d'arme
     
-    if(not schemaValide(arme.categories, categoriesSchema)):
-        messageErreur.append("Les catégories entrées ne sont pas valides.")
+    if(verificationCategoriesArme(arme.categories) != ""):
+        messageErreur.append(verificationCategoriesArme(arme.categories))
+    
+    # En cas d'erreurs pour certains attributs
+    if messageErreur != []:
+        return messageErreur
+    
+    #### Vérification de la présence de nomBalise dans la BDD ####
+    
+    
+    
     
     
     # Implémenter fonction pour vérifier si nomBalise existe dans la BDD
@@ -96,13 +162,10 @@ async def creerArme(arme: Arme):
     # Creation de l'arme dans la BDD
     
     
-    # En cas d'erreur
-    if messageErreur != []:
-        return messageErreur
-    
+   
     
 
-    
+    log(f"Creation d'une arme - {datetime.now().strftime('%d/%m/%Y %X')}")
     log(f"Nom de l'arme : {arme.nom}")
     log(f"Description de l'arme : {arme.description}")
     log(f"Prix de l'arme : {arme.prix}")

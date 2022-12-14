@@ -2,17 +2,12 @@
 
 
 from jsonschema import validate
-from string import ascii_letters
-from config import caracteristiques
+from config import caracteristiques,categoriesArme,typeObjetsMagiques
 
 def schemaValide(objetJSON: list, schemaJSON) -> bool:
     """ Fonction permettant de valider un objet JSON avec un schéma
         Retourne True si valide, False sinon"""
-    
 
-    
-    print(schemaJSON)
-        
     try:
         validate(objetJSON, schemaJSON)
         return True # Fichier répondant au schéma
@@ -37,10 +32,30 @@ def verificationAlpha(chaine: str) -> bool:
         Sinon, retourne false"""
         
     for lettre in chaine:
-        if lettre not in ascii_letters and lettre != " ":
+        if not lettre.isalpha() and lettre != " ":
             return False
         
     return True
+        
+    
+def verificationCategoriesArme(listeCategories: list) -> str:
+    """ Fonction vérifiant si une liste de catégories d'arme est valide
+        Chaque élement de la liste doivent être présent dans les catégories définies en config
+        Il ne doit pas y avoir de doublons"""
+        
+    categoriesFinal = []
+    
+    for cat in listeCategories:
+        if cat not in categoriesFinal:
+            categoriesFinal.append(cat)
+        else:
+            return "Il y a des doublons dans les catégories."
+    
+    for cat in categoriesFinal:
+        if cat not in categoriesArme:
+            return f"La catégorie {cat} n'éxiste pas."
+                
+    return ""
         
     
 
@@ -121,17 +136,21 @@ def verificationPoids(poids: float) -> str:
 
 
 
-def verificationArmure(armure: int) -> bool:
+def verificationArmure(armure: int) -> str:
     """ Vérifie l'armure
         Elle peut être négative 
         Ne sert à rien, la vérification du type est faite en amont"""
+    
+    if type(armure) is not int:
+        return "Le nombre de points d'armure doit être un entier."
     
     return ""
 
 def verificationCaracteristique(caracteristique: str) -> str:
     """ Vérifie si la caractéristique entrée est dans la liste des caractéristiques existantes"""
     
-    if caracteristique.lower() not in caracteristiques:
+    print(caracteristique)
+    if caracteristique not in caracteristiques:
         return "La caractéristique n'est pas valide."
     else:
         return ""
@@ -146,11 +165,11 @@ def verificationNomBalise(nomBalise: str) -> str:
         return ""
 
 # Non implémentée
-def nomBaliseDansDB(nomBalise: str) -> bool:
+def nomBaliseDansDB(nomBalise: str) -> str:
     """ Check dans la DB si nomBalise est présent """
 
     # Non implémentée
-    return True
+    return ""
 def verificationMalusArmure(malusArmure: int) -> str:
     ''' Vérifie si malusArmure est correcte '''
 
@@ -165,7 +184,10 @@ def verificationMalusArmure(malusArmure: int) -> str:
 def verifiationTypeObject(typeObject: str) -> str:
     """ Vérifie si le typeObject existe """
 
-    return True
+    if typeObject not in typeObjetsMagiques:
+        return f"{typeObject} n'existe pas."
+
+    return ""
 
 
 

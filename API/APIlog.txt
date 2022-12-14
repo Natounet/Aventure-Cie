@@ -91,3 +91,37 @@ Armure de l'arme : 3
 Caracteristique de l'arme : puissance
 Catégories de l'arme : ['test']
 
+Nom de l'arme : Excalibur
+Description de l'arme : Grande épée
+Prix de l'arme : 10.0
+Critique de l'arme : 3
+Portée de l'arme : 5
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 6
+Caracteristique de l'arme : Puissance
+Catégories de l'arme : ['Contendant']
+
+Nom de l'arme : Excalibur
+Description de l'arme : Grande épée
+Prix de l'arme : 10.0
+Critique de l'arme : 3
+Portée de l'arme : 5
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 6
+Caracteristique de l'arme : Puissance
+Catégories de l'arme : ['Contendant', 'Tranchant']
+
+Creation d'un don - 14/12/2022 21:29:15
+NomBalise du don : grandDon
+Nom du don : Le grand don special
+Caractéristique du don : Puissance
+Histoire du don : Grand don donnée par mes ancetres
+
+Creation d'un don - 14/12/2022 21:30:39
+NomBalise du don : grandDon
+Nom du don : Le grand don spécial
+Caractéristique du don : Puissance
+Histoire du don : Grand don donnée par mes ancetres
+

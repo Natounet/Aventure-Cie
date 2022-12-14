@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS fichePersonnage(
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nom varchar(100) NOT NULL, -- Nom du personnage / Monstre
     langues JSON NOT NULL, -- langues parlées voir persoLangue.json
-    taille int NOT NULl, -- Taille en centimètres
+    taille float NOT NULl, -- Taille en mètres
     poids float NOT NULL, -- Poids en kilogrammes
     age int NOT NULL, -- Age ( entre 8 et 600 ans)
     sexe varchar(20) NOT NULL, -- Peuple du personnage

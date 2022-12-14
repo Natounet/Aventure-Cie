@@ -28,3 +28,91 @@ Choix des technologies :
   - BACK : FastAPI
  
 Docker puis Google Cloud
+
+Diagramme de la base de donnée
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'textColor': '#000000','primaryColor':'#FFFFFF','lineColor':'#FFFFFF'}}}%%
+erDiagram
+
+
+DONS{
+    varchar nomBalise
+    varchar nom
+    varchar caracteristique 
+    text histoire    
+}
+
+ARMES ||--|{ DONS: nomBalise
+ARMES{ 
+    int id
+    varchar nom
+    text description
+    float prix
+    int critique
+    int portee
+    varchar degats
+    float poids
+    int armure
+    varchar caracteristique
+    json categories
+    varchar nomBalise
+}
+
+
+ARMURES ||--|{ DONS:nomBalise
+ARMURES{
+    int id
+    varchar nom
+    text description
+    float prix
+    float poids
+    int armure
+    varchar caracteristique
+    varchar categorie
+    int malusArmure
+    varchar nomBalise
+}
+
+objetsMagiques ||--|{ DONS: nomBalise
+objetsMagiques{
+    int id
+    varchar nom
+    text description
+    float prix
+    text histoire
+    text localisation
+    varchar utilisation
+    boolean spam
+    int coutPsyche
+    int coutVie
+    varchar caracteristique
+    varchar typeObjet
+    varchar nomBalise
+}
+
+fichePersonnage{
+    int id
+    varchar nom
+    JSON langues
+    float taille
+    float poids
+    int age
+    varchar sexe
+    int niveau
+    varchar biome
+    json caracteristiques
+    int pv
+    int pointPsyche
+    int armure
+    varchar positionBase
+    json competences
+    json lootPossible
+    json inventaire
+    json equipement
+    int facteurPuissance
+    json dons
+    text description
+    blob image
+}
+```

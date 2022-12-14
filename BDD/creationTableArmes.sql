@@ -23,3 +23,4 @@ CREATE TABLE IF NOT EXISTS armes(
     FOREIGN KEY (nomBalise) REFERENCES dons(nomBalise)
 );
 
+

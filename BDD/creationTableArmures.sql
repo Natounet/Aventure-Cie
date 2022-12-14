@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS armures(
     armure int NOT NULL, -- Poinds d'armure
 
     caracteristique varchar(100) NOT NULL, -- une seule caractéristique ( ex puissance )
-    categories varchar(100) NOT NULL,  -- Il peut y avoir que une catégorie par armure
+    categorie varchar(100) NOT NULL,  -- Il peut y avoir que une catégorie par armure
     malusArmure int NOT NULL, -- Malus lié au poids de l'armure ( -5 => -50% )
 
     nomBalise varchar(100), -- id du don, peut être nul quand pas de don associé
@@ -22,3 +22,4 @@ CREATE TABLE IF NOT EXISTS armures(
 
 
 );
+

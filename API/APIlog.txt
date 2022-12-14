@@ -31,3 +31,63 @@ Armure de l'arme : 0
 Caracteristique de l'arme : finesse
 CatÃ©gories de l'arme : ['puissance', 'categorie2']
 
+Nom de l'arme : Damacus
+Description de l'arme : Epée du grand dragon
+Prix de l'arme : 100.0
+Critique de l'arme : 2
+Portée de l'arme : 13
+Nom de l'arme : Damacus
+Description de l'arme : Epée du grand dragon
+Prix de l'arme : 100.0
+Critique de l'arme : 2
+Portée de l'arme : 13
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 3
+Caracteristique de l'arme : puissance
+Catégories de l'arme : ['aucune idee']
+
+Nom de l'arme : Damacus
+Description de l'arme : Epée du 2grand dragon
+Prix de l'arme : 100.0
+Critique de l'arme : 2
+Portée de l'arme : 0
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 3
+Caracteristique de l'arme : puissance
+Catégories de l'arme : ['aucune idee']
+
+Nom de l'arme : Damacus
+Description de l'arme : Epée du 2grand dragon
+Prix de l'arme : 100.0
+Critique de l'arme : 2
+Portée de l'arme : 0
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 3
+Caracteristique de l'arme : puissance
+Catégories de l'arme : ['aucune idee']
+
+Nom de l'arme : Damacus
+Description de l'arme : EpÃ©e du 2grand dragon
+Prix de l'arme : 100.0
+Critique de l'arme : 2
+PortÃ©e de l'arme : 1
+DÃ©gats de  l'arme : 2D/8
+Poids de l'arme : 1.0
+Armure de l'arme : 3
+Caracteristique de l'arme : puissance
+CatÃ©gories de l'arme : ['test']
+
+Nom de l'arme : Damacus
+Description de l'arme : EpÃ©e du 2grand dragon
+Prix de l'arme : 100.0
+Critique de l'arme : 2
+PortÃ©e de l'arme : 1
+DÃ©gats de  l'arme : 2D8
+Poids de l'arme : 1.0
+Armure de l'arme : 3
+Caracteristique de l'arme : puissance
+CatÃ©gories de l'arme : ['test']
+

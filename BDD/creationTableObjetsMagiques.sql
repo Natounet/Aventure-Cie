@@ -19,3 +19,4 @@ CREATE TABLE IF NOT EXISTS objetsMagiques(
     FOREIGN KEY(nomBalise) REFERENCES dons(nomBalise)
 
 );
+

@@ -32,7 +32,7 @@ Docker puis Google Cloud
 Diagramme de la base de donnée
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'textColor': '#000000','primaryColor':'#FFFFFF','lineColor':'#FFFFFF'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'textColor': '#000000','primaryColor':'#FFFFFF','lineColor':'#000000'}}}%%
 erDiagram
 
 

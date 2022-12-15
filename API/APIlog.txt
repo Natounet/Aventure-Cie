@@ -336,3 +336,171 @@ Caracteristique de l'objet magique: Puissance
 Type de l'objet magique: Lunette
 nomBalise de l'objet magique: string
 
+16/12/2022 00:04:33 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: Mon super objet magique
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Y en a pas
+Localisation de l'objet magique: Y en a pas
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 10
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: None
+
+16/12/2022 00:07:59 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: Mon super objet magique
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Y en a pas
+Localisation de l'objet magique: Y en a pas
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 10
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: None
+
+16/12/2022 00:08:27 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: Mon super objet magique
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Y en a pas
+Localisation de l'objet magique: Y en a pas
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 10
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:29:13 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: Pas de desc
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Pas d'hi
+Localisation de l'objet magique: pas de loca
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 5
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:31:53 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: Pas de desc
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Pas d'hi
+Localisation de l'objet magique: pas de loca
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 5
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:32:52 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: Pas de desc
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Pas d'hi
+Localisation de l'objet magique: pas de loca
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 5
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:34:02 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: Pas de desc
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Pas d'hi
+Localisation de l'objet magique: pas de loca
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 5
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:35:27 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: Pas de desc
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Pas d'hi
+Localisation de l'objet magique: pas de loca
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 5
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:36:36 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: Pas de desc
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Pas d'hi
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 5
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:37:07 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: None
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Pas d'hi
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 6
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:37:16 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: None
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: None
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 6
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+
+16/12/2022 00:37:26 - Creation d'un objet magique
+Nom de l'objet magique: Mon super objet magique
+Description de l'objet magique: None
+Prix de l'objet magique: None
+Histoire de l'objet magique: None
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 3
+Coût en point de vie de l'objet magique: 6
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunettes
+nomBalise de l'objet magique: test
+

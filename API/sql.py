@@ -30,7 +30,7 @@ def connexionBDD() -> MySQLConnection:
         connexion = connect(host=HOST, user=USER, password=PASSWORD,database=DATABASE)
       
     except (DatabaseError, InterfaceError) as Error:
-        print(f"Ces erreurs ce sont produites : {Error}")
+        print(f"Ces erreurs ce sont produites lors de l'ajout d'une arme : {Error}")
         
     return connexion
 
@@ -78,7 +78,7 @@ def creerDonDansLaBDD(don: classes.Don) -> bool:
     
     except (DatabaseError, InterfaceError) as Error:
             connexion.close()
-            print(Error)
+            print("Il y a une erreur lors de l'ajout du don " + str(Error))
             return False
     
     return False # Il y a eu une erreur dans la connexion
@@ -172,7 +172,62 @@ def creerArmureDansLaBDD(armure: classes.Armure) -> bool:
         
         except (DatabaseError, InterfaceError) as Error:
             connexion.close()
-            print(Error)
+            print("Il y a une erreur lors de l'ajout de l'armure " + str(Error))
             return False
     
     return False
+
+def creerObjetMagiqueDansLaBDD(objetMagique: classes.objetMagique) -> bool:
+    """ Fonction permettant de créer une armure dans la base de données
+        Prends en paramètre un objet armure
+        Retourne true si l'armure a été crée
+        False sinon 
+        
+        
+        * nom: str # Nom de l'objet magique
+        * description: Union[str,None] # Description de l'objet magique ( peut ne pas être donné)
+        * prix: Union[float, None] # Prix de l'objet, ( peut ne pas être donné)
+        * histoire: Union[str, None] # Histoire de l'objet ( peut ne pas être donné)
+        * localisation: Union[str, None] # Lore de l'objet ( peut ne pas être donné)
+        * utilisation: str # Utilisation tous les x temps ( ) jour/semaine/mois/année/heure
+        * spam: bool # Peut être utilisable à l'infini 
+        * coutPsyche: int # Cout en psyche de l'objet 
+        * coutVie: int # Cout en vie de l'objet 
+        * caracteristique: str # Caracteristique, ex : Puissance
+        * typeObjet: str # Type de l'objet magique exemple : lunette, bottes, ...
+        * nomBalise: Union[str, None] # nom du don lié à l'objet ( peut ne pas être donné)
+    """    
+    
+    connexion = connexionBDD()
+    
+    if connexion is not None:
+        try:
+            cursor = connexion.cursor()
+            
+            query = """INSERT INTO objetsMagiques(nom,description,prix,histoire,localisation
+                    ,utilisation,spam,coutPsyche,coutVie,caracteristique,typeObjet,nomBalise)
+                VALUES (%(nom)s,%(description)s,%(prix)s,%(histoire)s,%(localisation)s,%(utilisation)s
+                ,%(spam)s,%(coutPsyche)s,%(coutVie)s,%(caracteristique)s,%(typeObjet)s,%(nomBalise)s
+                )
+            """
+            
+            values = {"nom":objetMagique.nom,"description":objetMagique.description,"prix":objetMagique.prix,"histoire":objetMagique.histoire,
+                      "localisation":objetMagique.localisation,"utilisation":objetMagique.utilisation,"spam":objetMagique.spam,
+                      "coutPsyche":objetMagique.coutPsyche,"coutVie":objetMagique.coutVie,"caracteristique":objetMagique.caracteristique,
+                      "typeObjet":objetMagique.typeObjet,"nomBalise":objetMagique.nomBalise}
+            
+            cursor.execute(query,values)
+            
+            connexion.commit()
+            
+            connexion.close()
+            
+            return True
+        
+        except (DatabaseError, InterfaceError) as Error:
+            connexion.close()
+            print("Il y a une erreur lors de l'ajout de l'objet magique " + str(Error))
+            return False
+        
+    return False
+

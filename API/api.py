@@ -356,6 +356,8 @@ def creerObjetMagique(objetMagique: classes.objetMagique):
 
     #### Vérification de la présence de nomBalise dans la BDD ####
     
+    if(objetMagique.nomBalise is not None and not nomBaliseDansBDD(objetMagique.nomBalise)):
+        messageErreur.append("Le don associé à l'armure n'existe pas.")
     
 
     ### Si erreur ###
@@ -365,6 +367,9 @@ def creerObjetMagique(objetMagique: classes.objetMagique):
         
 
     ### Ajout de l'objet magique dans la BDD ###
+    
+    if(not creerObjetMagiqueDansLaBDD(objetMagique)):
+        "Il y a eu une erreur lors de la création de l'objet magique."
 
     log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'un objet magique")
     log(f"Nom de l'objet magique: {objetMagique.nom}")

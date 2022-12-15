@@ -149,3 +149,27 @@ Nom du don : mon hyper don
 Caractéristique du don : Puissance
 Histoire du don : None
 
+Creation d'une arme - 15/12/2022 18:24:51
+Nom de l'arme : Excalibur
+Description de l'arme : La plus grande épée du monde
+Prix de l'arme : 100.0
+Critique de l'arme : 3
+Portée de l'arme : 10
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 4
+Caracteristique de l'arme : Puissance
+Catégories de l'arme : ['Contendant']
+
+Creation d'une arme - 15/12/2022 18:25:38
+Nom de l'arme : Excalibur
+Description de l'arme : La plus grande épée du monde
+Prix de l'arme : 100.0
+Critique de l'arme : 3
+Portée de l'arme : 10
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 4
+Caracteristique de l'arme : Puissance
+Catégories de l'arme : ['Contendant', 'Tranchant']
+

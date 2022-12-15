@@ -74,9 +74,9 @@ async def creerDon(don: Don):
     
     ### Vérification que nomBalise n'est pas présent dans la BDD ###
 
-    if(nomBaliseDansBDD(don.nomBalise)):
+    if(don.nomBalise is not None and nomBaliseDansBDD(don.nomBalise)):
         messageErreur.append("Ce nom balise est déjà utilisé")
-    
+        
     # Si il y a des erreurs
     if messageErreur != []:
         return messageErreur
@@ -138,7 +138,9 @@ async def creerArme(arme: Arme):
         arme.nomBalise = sanitizeChaine(arme.nomBalise)
 
     arme.degats = sanitizeChaine(arme.degats)
-
+    
+    if(arme.prix == 0):
+        arme.prix = None
 
     #### Vérification des attributs ####
 
@@ -165,16 +167,13 @@ async def creerArme(arme: Arme):
     
     #### Vérification de la présence de nomBalise dans la BDD ####
     
+    if(arme.nomBalise is not None and not nomBaliseDansBDD(arme.nomBalise)):
+        return "Le don associé à l'arme n'existe pas."
     
+    ### Creation de l'arme dans la BDD ###
     
-    
-    
-    # Implémenter fonction pour vérifier si nomBalise existe dans la BDD
-    # Vérification du nomBalise
-    
-    # Creation de l'arme dans la BDD
-    
-    
+    if(not creerArmeDansLaBDD(arme)):
+        return "Il y a eu une erreur dans la création de l'arme."
    
     
 

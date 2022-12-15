@@ -166,11 +166,11 @@ def verificationMalusArmure(malusArmure: int) -> str:
     else:
         return ""
 
-def verifiationTypeObject(typeObject: str) -> str:
-    """ Vérifie si le typeObject existe """
+def verifiationTypeObjet(typeObject: str) -> str:
+    """ Vérifie si le typeObject existe dans la liste définie en configuration """
 
     if typeObject not in config.typeObjetsMagiques:
-        return f"{typeObject} n'existe pas."
+        return f"{typeObject} n'existe pas dans les types d'objets."
 
     return ""
 
@@ -180,54 +180,22 @@ def verificationCategorieArmure(categorie) -> str:
         Retourne une chaine vide sinon """
 
     if categorie not in config.categoriesArmures:
-        return "La catégorie d'armure n'existe pas"
+        return "La catégorie d'armure n'existe pas."
 
     return ""
 
+def verificationUtilisation(utilisation) -> str:
+    """ Fonction vérifiant si une utilisation donnée est présente dans la liste des utilisations possible
+        Retourne une chaine vide si elle est présente
+        Sinon elle retourne une méssage d'erreur"""
+
+    if utilisation not in config.utilisationPossible:
+        return "L'utilisation indiquée n'est pas possible."
+    else:
+        return ""
 
 
-"""
-Les vérifications faites par la fonction
-
-Vérifié : 
-nom
-prix
-critique
-portee
-degats
-poids
-armure
-caracteristique
-nomBalise
-malusArmure
-typeObjet
-
-Non verifié : 
-
-description
-
-Arme : 
-    categories
-
-Armure :
-    categorie
-
-Objet magique :  
-
-coutPsyche
-spam
-utlisation
-localisation
-coutVie
-histoire
-
-"""
-
-
-
-
-
-def verifications(nom: str = None, prix: float = None, critique: int = None, portee: float = None, degats: str = None, poids: float = None, armure: int = None, caracteristique: str = None, malusArmure: float = None, typeObject: str = None):
+def verifications(nom: str = None, prix: float = None, critique: int = None, portee: float = None, degats: str = None, poids: float = None, armure: int = None, caracteristique: str = None, malusArmure: float = None, typeObjet: str = None):
     """ Fonction qui s'occupe de vérifier seulement les arguments donnés explicitement
         Pour les armes, on vérifiera que les attributs des armes 
         
@@ -264,8 +232,8 @@ def verifications(nom: str = None, prix: float = None, critique: int = None, por
     if(malusArmure is not None):
         messageErreur.append(verificationMalusArmure(malusArmure))
 
-    if(typeObject is not None):
-        messageErreur.append(verifiationTypeObject(typeObject))
+    if(typeObjet is not None):
+        messageErreur.append(verifiationTypeObjet(typeObjet))
 
     
 

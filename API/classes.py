@@ -22,7 +22,6 @@ class Arme(BaseModel):
     nomBalise: Union[str, None] # NomBalise du don qu'il possède si existant ( peut être nul)
  
 class Armure(BaseModel):
-
     nom: str # Nom de l'armure
     description: Union[str,None] # Description de l'armure ( peut ne pas être présente )
     prix: Union[float, None] # Prix de l'armure ( peut ne pas être présente )
@@ -33,4 +32,18 @@ class Armure(BaseModel):
     malusArmure: int # Malus lié au poids de l'armure ( -5 = -5% )
     nomBalise: Union[str, None] # nomBalise du don associé si présent
 
+
+class objetMagique(BaseModel):
+    nom: str # Nom de l'objet magique
+    description: Union[str,None] # Description de l'objet magique ( peut ne pas être donné)
+    prix: Union[float, None] # Prix de l'objet, ( peut ne pas être donné)
+    histoire: Union[str, None] # Histoire de l'objet ( peut ne pas être donné)
+    localisation: Union[str, None] # Lore de l'objet ( peut ne pas être donné)
+    utilisation: str # Utilisation tous les x temps ( ) jour/semaine/mois/année/heure
+    spam: bool # Peut être utilisable à l'infini 
+    coutPsyche: int # Cout en psyche de l'objet
+    coutVie: int # Cout en vie de l'objet
+    caracteristique: str # Caracteristique, ex : Puissance
+    typeObjet: str # Type de l'objet magique exemple : lunette, bottes, ...
+    nomBalise: Union[str, None] # nom du don lié à l'objet ( peut ne pas être donné)
 

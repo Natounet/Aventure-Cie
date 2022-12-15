@@ -252,3 +252,87 @@ Catégorie de l'armure : Corium
 malusArmure de l'armure : 0
 nomBalise de l'armure : None
 
+15/12/2022 23:54:58 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: Le plus puissant des objets magiques
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Aucune histoire
+Localisation de l'objet magique: Pas de localisation
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 0
+Coût en point de vie de l'objet magique: 0
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunette
+nomBalise de l'objet magique: string
+
+15/12/2022 23:55:10 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: Le plus puissant des objets magiques
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Aucune histoire
+Localisation de l'objet magique: Pas de localisation
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 0
+Coût en point de vie de l'objet magique: 0
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunette
+nomBalise de l'objet magique: string
+
+15/12/2022 23:55:24 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: Le plus puissant des objets magiques
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: Aucune histoire
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 0
+Coût en point de vie de l'objet magique: 0
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunette
+nomBalise de l'objet magique: string
+
+15/12/2022 23:55:27 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: Le plus puissant des objets magiques
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: None
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 0
+Coût en point de vie de l'objet magique: 0
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunette
+nomBalise de l'objet magique: string
+
+15/12/2022 23:55:30 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: None
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: None
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 0
+Coût en point de vie de l'objet magique: 0
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunette
+nomBalise de l'objet magique: string
+
+15/12/2022 23:55:49 - Creation d'un objet magique
+Nom de l'objet magique: Mon objet magique
+Description de l'objet magique: None
+Prix de l'objet magique: 0.0
+Histoire de l'objet magique: None
+Localisation de l'objet magique: None
+Utilisation de l'objet magique: Jour
+Spam de l'objet magique: True
+Coût en psyche de l'objet magique: 0
+Coût en point de vie de l'objet magique: 0
+Caracteristique de l'objet magique: Puissance
+Type de l'objet magique: Lunette
+nomBalise de l'objet magique: string
+

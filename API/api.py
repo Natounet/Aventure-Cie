@@ -32,11 +32,6 @@ def sanitizeChaine(chaine: str) -> str:
     return bleach.clean(chaine,strip=True)
 
 
-def premiereLettreMajuscule(chaine: str) -> str:
-    """ Fonction qui retourne une chaine avec seulement la première lettre en majuscule
-        ex: "bOnJOUr -> Bonjour"""
-        
-    return chaine.capitalize()
 
 
 ### FONCTIONS DE VERIFICATION
@@ -61,12 +56,12 @@ async def creerDon(don: Don) -> list:
         
     ### Néttoyage des chaines ###
     
-    don.nomBalise = bleach.clean(don.nomBalise)
-    don.nom = bleach.clean(don.nom)
-    don.caracteristique = bleach.clean(don.caracteristique).capitalize()
+    don.nomBalise = sanitizeChaine(don.nomBalise)
+    don.nom = sanitizeChaine(don.nom)
+    don.caracteristique = sanitizeChaine(don.caracteristique).capitalize()
     
     if don.histoire is not None:
-        don.histoire = bleach.clean(don.histoire)
+        don.histoire = sanitizeChaine(don.histoire)
     
     
     ### Vérifications des autres attributs ###
@@ -154,6 +149,12 @@ async def creerArme(arme: Arme) -> list:
 
     if(not schemaValide(arme.categories, categoriesSchema)):
         messageErreur.append("Les catégories entrées ne sont pas valides.")
+
+    # Vérification de la description
+
+    if(arme.description is not None):
+        if(not verificationTailleChaine(arme.description,1,1000)):
+            messageErreur.append("La taille de la description est actuellement limitée à 1000 caractères")
     
     # Formattage du nom des catégories
     for i in range(len(arme.categories)):
@@ -196,34 +197,37 @@ async def creerArme(arme: Arme) -> list:
     return []
 
 @app.post("/ajout/armure")
-def creerArmure(armure: Armure) -> list:
+async def creerArmure(armure: Armure) -> list:
     """ Route permettant de créer une armure dans la base de données 
     
-        * nom: str # Nom de l'armure
-        * description: Union[str,None] # Description de l'armure ( peut ne pas être présente )
-        * prix: Union[float, None] # Prix de l'armure ( peut ne pas être présente )
-        * poids: float # Poids de l'armure
-        * armure: int # Points d'armure
-        * caracteristique: str # Caractéristique dépendante de l'arme ( ex: Puissance )
-        * categorie: str # Catégorie de l'armure ( type d'armure, voir config.py )
-        * malusArmure: int # Malus lié au poids de l'armure ( -5 = -5% )
-        * nomBalise: Union[str, None] # nomBalise du don associé si présent
+        Attributs armure:\n
+            * nom: str # Nom de l'armure
+            * description: Union[str,None] # Description de l'armure ( peut ne pas être présente )
+            * prix: Union[float, None] # Prix de l'armure ( peut ne pas être présente )
+            * poids: float # Poids de l'armure
+            * armure: int # Points d'armure
+            * caracteristique: str # Caractéristique dépendante de l'arme ( ex: Puissance )
+            * categorie: str # Catégorie de l'armure ( type d'armure, voir config.py )
+            * malusArmure: int # Malus lié au poids de l'armure ( -5 = -5% )
+            * nomBalise: Union[str, None] # nomBalise du don associé si présent
 
         Retourne une liste d'erreurs ( vide si pas d'erreurs)
+
+
     """
 
     ### Nettoyage des chaînes ### 
 
-    armure.nom = bleach.clean(armure.nom)
+    armure.nom = sanitizeChaine(armure.nom)
 
     if armure.description is not None:
-        armure.description = bleach.clean(armure.description)
+        armure.description = sanitizeChaine(armure.description)
     
-    armure.caracteristique = bleach.clean(armure.caracteristique).capitalize()
-    armure.categorie = bleach.clean(armure.categorie).capitalize()
+    armure.caracteristique = sanitizeChaine(armure.caracteristique).capitalize()
+    armure.categorie = sanitizeChaine(armure.categorie).capitalize()
 
     if armure.nomBalise is not None:
-        armure.nomBalise = bleach.clean(armure.nomBalise)
+        armure.nomBalise = sanitizeChaine(armure.nomBalise)
 
     ### Vérification des attributs
 
@@ -234,7 +238,7 @@ def creerArmure(armure: Armure) -> list:
 
     if(armure.description is not None):
         if(not verificationTailleChaine(armure.description,1,1000)):
-            messageErreur.append("La taille de la description est actuellement limitée à 1000 caractères")
+            messageErreur.append("La taille de la description est actuellement limitée à 1000 caractères.")
 
         
     #### Vérification de la présence de nomBalise dans la BDD ####
@@ -265,6 +269,116 @@ def creerArmure(armure: Armure) -> list:
     log(f"nomBalise de l'armure : {armure.nomBalise}")
     log("")
     
+    return []
+
+@app.post("/ajout/objetMagique")
+def creerObjetMagique(objetMagique: classes.objetMagique):
+
+    """ Route permettant de créer un objet magique dans la base de données 
+
+        Attributs objet magique:\n
+            * nom: str # Nom de l'objet magique
+            * description: Union[str,None] # Description de l'objet magique ( peut ne pas être donné)
+            * prix: Union[float, None] # Prix de l'objet, ( peut ne pas être donné)
+            * histoire: Union[str, None] # Histoire de l'objet ( peut ne pas être donné)
+            * localisation: Union[str, None] # Lore de l'objet ( peut ne pas être donné)
+            * utilisation: str # Utilisation tous les x temps ( ) jour/semaine/mois/année/heure
+            * spam: bool # Peut être utilisable à l'infini 
+            * coutPsyche: int # Cout en psyche de l'objet 
+            * coutVie: int # Cout en vie de l'objet 
+            * caracteristique: str # Caracteristique, ex : Puissance
+            * typeObjet: str # Type de l'objet magique exemple : lunette, bottes, ...
+            * nomBalise: Union[str, None] # nom du don lié à l'objet ( peut ne pas être donné)
+        
     
+    """
+
+
+    ### Nettoyage des chaînes ###
+
+    objetMagique.nom = sanitizeChaine(objetMagique.nom)
+
+    if objetMagique.description is not None:
+        objetMagique.description = sanitizeChaine(objetMagique.description)
+    
+    if objetMagique.histoire is not None:
+        objetMagique.histoire = sanitizeChaine(objetMagique.histoire)
+
+    if objetMagique.localisation is not None:
+        objetMagique.localisation = sanitizeChaine(objetMagique.localisation)
+    
+    objetMagique.utilisation = sanitizeChaine(objetMagique.utilisation).capitalize()
+    
+    if objetMagique.caracteristique is not None:
+        objetMagique.caracteristique = sanitizeChaine(objetMagique.caracteristique).capitalize()
+    
+    if objetMagique.typeObjet is not None:
+        objetMagique.typeObjet = sanitizeChaine(objetMagique.typeObjet).capitalize()
+
+    if objetMagique.nomBalise is not None:
+        objetMagique.nomBalise = sanitizeChaine(objetMagique.nomBalise)
+
+    ### Vérification des attributs
+
+    messageErreur = (verifications(nom=objetMagique.nom, caracteristique=objetMagique.caracteristique,typeObjet=objetMagique.typeObjet,prix=objetMagique.prix))
+
+    # Histoire
+    if objetMagique.histoire is not None:
+        if(not verificationTailleChaine(objetMagique.histoire,1,1000)):
+                messageErreur.append("La taille de l'histoire est actuellement limitée à 1000 caractères.")
+
+    # Localisation
+    if objetMagique.localisation is not None:
+        if(not verificationTailleChaine(objetMagique.localisation,1,1000)):
+                messageErreur.append("La taille de la localisation est actuellement limitée à 1000 caractères.")
+
+    # Description
+    if objetMagique.description is not None:
+        if(not verificationTailleChaine(objetMagique.description,1,1000)):
+                messageErreur.append("La taille de la description est actuellement limitée à 1000 caractères.")
+
+    # Utilisation
+    if(not verificationTailleChaine(objetMagique.utilisation,1,10)):
+            messageErreur.append("La taille de l'utilisation ne doit pas dépassée 10 caractères.")
+
+    if(verificationUtilisation(objetMagique.utilisation) != ""):
+        messageErreur.append(verificationUtilisation(objetMagique.utilisation))
+
+    # Coût psyche
+
+    if(objetMagique.coutPsyche < 0):
+        messageErreur.append("Le coût en psyche ne peut pas être négatif.")
+
+    # Coût PV
+
+    if(objetMagique.coutVie < 0):
+        messageErreur.append("Le coût en point de vie ne peut être négatif.")
+
+    #### Vérification de la présence de nomBalise dans la BDD ####
+    
+    
+
+    ### Si erreur ###
+
+    if messageErreur != []:
+        return messageErreur
+        
+
+    ### Ajout de l'objet magique dans la BDD ###
+
+    log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'un objet magique")
+    log(f"Nom de l'objet magique: {objetMagique.nom}")
+    log(f"Description de l'objet magique: {objetMagique.description}")
+    log(f"Prix de l'objet magique: {objetMagique.prix}")
+    log(f"Histoire de l'objet magique: {objetMagique.histoire}")
+    log(f"Localisation de l'objet magique: {objetMagique.localisation}")
+    log(f"Utilisation de l'objet magique: {objetMagique.utilisation}")
+    log(f"Spam de l'objet magique: {objetMagique.spam}")
+    log(f"Coût en psyche de l'objet magique: {objetMagique.coutPsyche}")
+    log(f"Coût en point de vie de l'objet magique: {objetMagique.coutVie}")
+    log(f"Caracteristique de l'objet magique: {objetMagique.caracteristique}")
+    log(f"Type de l'objet magique: {objetMagique.typeObjet}")
+    log(f"nomBalise de l'objet magique: {objetMagique.nomBalise}")
+    log("")
 
     return []

@@ -8,7 +8,7 @@ from datetime import datetime # Pour la date
 
 from verifications import *
 from classes import *
-from sql import nomBaliseDansBDD
+from sql import *
 
 app = FastAPI()
 
@@ -60,7 +60,9 @@ async def creerDon(don: Don):
     don.nomBalise = bleach.clean(don.nomBalise)
     don.nom = bleach.clean(don.nom)
     don.caracteristique = bleach.clean(don.caracteristique).capitalize()
-    don.histoire = bleach.clean(don.histoire)
+    
+    if don.histoire is not None:
+        don.histoire = bleach.clean(don.histoire)
     
     
     ### Vérifications des autres attributs ###
@@ -82,7 +84,9 @@ async def creerDon(don: Don):
     # Si pas d'érreurs
     
     
-    
+    if(not creerDonDansLaBDD(don)):
+        return "Il y a eu une erreur lors de la creation du don."
+
     
     
     ### LOG DU DON ###

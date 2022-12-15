@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS armures(
     
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT, -- Id de l'armure
     nom varchar(100) NOT NULL, -- Nom de l'armure ( pas unique )
-    description text NOT NULL, -- Description de l'armure
+    description text, -- Description de l'armure
     prix float, -- Prix de l'armure ( peut être null dans le cas d'une armure spéciale/légendaire)
 
     -- Caractéristiques

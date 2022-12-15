@@ -5,7 +5,7 @@ Tâches a réaliser
 - [x] : Créer et mettre en place la base de données
 - [ ]     1 - Fiche perso ( Fait appel à des items des autres tables
 - [x]     2 - Dons
-- [ ]     3 - Armes
+- [x]     3 - Armes
 - [ ]     4 - Armures
 - [ ]     5 - Objet Magiques
 - [ ] : Mettre en place une recherche de fiche de personnage dans la base de données :

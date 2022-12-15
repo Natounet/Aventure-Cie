@@ -142,7 +142,7 @@ async def creerArme(arme: Arme):
     #### Vérification des attributs ####
 
     # messageErreur est une liste des erreurs
-    messageErreur = verifications(nom=arme.nom, prix= arme.prix, critique=arme.critique, portee=arme.portee, degats=arme.degats, poids=arme.poids, armure=arme.armure, caracteristique=arme.caracteristique,nomBalise=arme.nomBalise)
+    messageErreur = verifications(nom=arme.nom, prix= arme.prix, critique=arme.critique, portee=arme.portee, degats=arme.degats, poids=arme.poids, armure=arme.armure, caracteristique=arme.caracteristique)
     
     # Vérification du JSON catégories
 
@@ -234,7 +234,7 @@ def creerArmure(armure: Armure):
     #### Vérification de la présence de nomBalise dans la BDD ####
     
     if(armure.nomBalise is not None and not nomBaliseDansBDD(armure.nomBalise)):
-        messageErreur.append("Le don associé à l'arme n'existe pas.")
+        messageErreur.append("Le don associé à l'armure n'existe pas.")
     
     ### Cas d'erreurs
 
@@ -245,7 +245,7 @@ def creerArmure(armure: Armure):
     ### Creation de l'armure dans la BDD ###
 
 
-    log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'une arme")
+    log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'une armure")
     log(f"Nom de l'armure : {armure.nom}")
     log(f"Description de l'armure : {armure.description}")
     log(f"Prix de l'armure : {armure.prix}")

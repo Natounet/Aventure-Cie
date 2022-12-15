@@ -94,7 +94,7 @@ def verificationNom(nom: str) -> str:
 def verificationPrix(prix: float) -> str:
     """ Vérification du prix """
     
-    if(prix <= 0):
+    if(prix < 0):
         return "Il y a un problème dans le prix."
     
     return ""

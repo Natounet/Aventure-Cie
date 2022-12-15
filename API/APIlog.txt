@@ -173,3 +173,14 @@ Armure de l'arme : 4
 Caracteristique de l'arme : Puissance
 Catégories de l'arme : ['Contendant', 'Tranchant']
 
+15/12/2022 22:17:06 - Creation d'une arme
+Nom de l'armure : Tarkovien
+Description de l'armure : La plus belle des armures
+Prix de l'armure : 0.0
+Poids de l'armure : 10.0
+Armure de l'armure : 5
+Caracteristique de l'armure : Puissance
+Catégorie de l'armure : Corium
+malusArmure de l'armure : 0
+nomBalise de l'armure : test2c
+

@@ -184,3 +184,71 @@ Catégorie de l'armure : Corium
 malusArmure de l'armure : 0
 nomBalise de l'armure : test2c
 
+15/12/2022 22:28:52 - Creation d'une armure
+Nom de l'armure : Tarkovien
+Description de l'armure : La plus belle des armures
+Prix de l'armure : 0.0
+Poids de l'armure : 10.0
+Armure de l'armure : 5
+Caracteristique de l'armure : Puissance
+Catégorie de l'armure : Corium
+malusArmure de l'armure : 0
+nomBalise de l'armure : test2c
+
+15/12/2022 22:29:29 - Creation d'une armure
+Nom de l'armure : Tarkovien
+Description de l'armure : La plus belle des armures
+Prix de l'armure : 0.0
+Poids de l'armure : 10.0
+Armure de l'armure : 5
+Caracteristique de l'armure : Puissance
+Catégorie de l'armure : Corium
+malusArmure de l'armure : 0
+nomBalise de l'armure : None
+
+15/12/2022 22:36:43 - Creation d'une arme
+Nom de l'arme : Excalibur
+Description de l'arme : La plus grande épée du monde
+Prix de l'arme : 100.0
+Critique de l'arme : 3
+Portée de l'arme : 10
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 4
+Caracteristique de l'arme : Puissance
+Catégories de l'arme : ['Contendant', 'Tranchant']
+
+15/12/2022 22:36:52 - Creation d'une arme
+Nom de l'arme : Excalibur
+Description de l'arme : None
+Prix de l'arme : 100.0
+Critique de l'arme : 3
+Portée de l'arme : 10
+Dégats de  l'arme : 2D8
+Poids de l'arme : 11.0
+Armure de l'arme : 4
+Caracteristique de l'arme : Puissance
+Catégories de l'arme : ['Contendant', 'Tranchant']
+
+15/12/2022 22:38:47 - Creation d'une armure
+Nom de l'armure : Tarkovien
+Description de l'armure : None
+Prix de l'armure : 0.0
+Poids de l'armure : 10.0
+Armure de l'armure : 5
+Caracteristique de l'armure : Puissance
+Catégorie de l'armure : Corium
+malusArmure de l'armure : 50
+nomBalise de l'armure : None
+
+15/12/2022 22:39:20 - Creation d'une armure
+Nom de l'armure : Tarkovien
+Description de l'armure : None
+Prix de l'armure : None
+Poids de l'armure : 10.0
+Armure de l'armure : 5
+Caracteristique de l'armure : Puissance
+Catégorie de l'armure : Corium
+malusArmure de l'armure : 0
+nomBalise de l'armure : None
+

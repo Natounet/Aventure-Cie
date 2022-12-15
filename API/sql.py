@@ -60,19 +60,26 @@ def creerDonDansLaBDD(don: classes.Don) -> bool:
         False sinon """
         
     connexion = connexionBDD()
-    if connexion is not None:
-        
-        cursor = connexion.cursor()
-        query = "INSERT INTO dons VALUES(%(nomBalise)s,%(nom)s,%(caracteristique)s,%(histoire)s);"
-        donnees = {"nomBalise":don.nomBalise,"nom":don.nom,"caracteristique":don.caracteristique,"histoire":don.histoire}
-        # Création de la commande
-        cursor.execute(query,donnees)
-        
-        # Ajout du don
-        connexion.commit()
-        
-        connexion.close()
-        return True # Création effectuée
+    
+    try:
+        if connexion is not None:
+            
+            cursor = connexion.cursor()
+            query = "INSERT INTO dons VALUES(%(nomBalise)s,%(nom)s,%(caracteristique)s,%(histoire)s);"
+            donnees = {"nomBalise":don.nomBalise,"nom":don.nom,"caracteristique":don.caracteristique,"histoire":don.histoire}
+            # Création de la commande
+            cursor.execute(query,donnees)
+            
+            # Ajout du don
+            connexion.commit()
+            
+            connexion.close()
+            return True # Création effectuée
+    
+    except (DatabaseError, InterfaceError) as Error:
+            connexion.close()
+            print(Error)
+            return False
     
     return False # Il y a eu une erreur dans la connexion
 
@@ -97,25 +104,75 @@ def creerArmeDansLaBDD(arme: classes.Arme):
     """
     
     connexion = connexionBDD()
-    if connexion is not None:
-        
-        cursor = connexion.cursor()
-        query = """INSERT INTO armes(nom,description,prix,critique,portee,degats,poids,armure,caracteristique,categories,nomBalise)
-                VALUES(%(nom)s,%(description)s,%(prix)s,%(critique)s,%(portee)s,
-                %(degats)s,%(poids)s,%(armure)s,%(caracteristique)s,
-                %(categories)s,%(nomBalise)s)"""
-        
-        params = {"nom":arme.nom,"description":arme.description,"prix":arme.prix,"critique":arme.critique,
-                  "portee":arme.portee,"degats":arme.degats,"poids":arme.poids,"armure":arme.armure,"caracteristique":arme.caracteristique,
-                  "categories":json.dumps(arme.categories),"nomBalise":arme.nomBalise}
+    try: 
+        if connexion is not None:
+            
+            cursor = connexion.cursor()
+            query = """INSERT INTO armes(nom,description,prix,critique,portee,degats,poids,armure,caracteristique,categories,nomBalise)
+                    VALUES(%(nom)s,%(description)s,%(prix)s,%(critique)s,%(portee)s,
+                    %(degats)s,%(poids)s,%(armure)s,%(caracteristique)s,
+                    %(categories)s,%(nomBalise)s)"""
+            
+            params = {"nom":arme.nom,"description":arme.description,"prix":arme.prix,"critique":arme.critique,
+                    "portee":arme.portee,"degats":arme.degats,"poids":arme.poids,"armure":arme.armure,"caracteristique":arme.caracteristique,
+                    "categories":json.dumps(arme.categories),"nomBalise":arme.nomBalise}
 
 
-        cursor.execute(query,params)
-        connexion.commit()
+            cursor.execute(query,params)
+            connexion.commit()
+            
+            connexion.close()
+            return True
         
-        connexion.close()
-        return True
+    except (DatabaseError, InterfaceError) as Error:
+            connexion.close()
+            print(Error)
+            return False
 
     return False
         
+def creerArmureDansLaBDD(armure: classes.Armure) -> bool:
+    """ Fonction permettant de créer une armure dans la base de données
+        Prends en paramètre un objet armure
+        Retourne true si l'armure a été crée
+        False sinon 
+        
+        * nom: str # Nom de l'armure
+        * description: Union[str,None] # Description de l'armure ( peut ne pas être présente )
+        * prix: Union[float, None] # Prix de l'armure ( peut ne pas être présente )
+        * poids: float # Poids de l'armure
+        * armure: int # Points d'armure
+        * caracteristique: str # Caractéristique dépendante de l'arme ( ex: Puissance )
+        * categorie: str # Catégorie de l'armure ( type d'armure, voir config.py )
+        * malusArmure: int # Malus lié au poids de l'armure ( -5 = -5% )
+        * nomBalise: Union[str, None] # nomBalise du don associé si présent
+     
+    """
+
+    connexion = connexionBDD()
     
+    if connexion is not None:
+        try:
+            
+            cursor = connexion.cursor()
+            
+            query = """ INSERT INTO armures(nom,description,prix,poids,armure,caracteristique,categorie,malusArmure,nomBalise)
+                        VALUES (%(nom)s,%(description)s,%(prix)s,%(poids)s,%(armure)s,
+                        %(caracteristique)s,%(categorie)s,%(malusArmure)s,%(nomBalise)s)"""
+                        
+            params = {"nom":armure.nom,"description":armure.description,"prix":armure.prix,"poids":armure.poids,
+                    "armure":armure.armure, "caracteristique":armure.caracteristique,"categorie":armure.categorie,"malusArmure":armure.malusArmure,
+                    "nomBalise":armure.nomBalise}    
+            
+            cursor.execute(query,params)
+            
+            connexion.commit()
+            
+            return True
+        
+        except (DatabaseError, InterfaceError) as Error:
+            connexion.close()
+            print(Error)
+            return False
+    
+    return False

@@ -45,7 +45,7 @@ def premiereLettreMajuscule(chaine: str) -> str:
 
 
 @app.post("/ajout/don")
-async def creerDon(don: Don):
+async def creerDon(don: Don) -> list:
     """ Route permettant la création d'un don dans la base de données
     
         Attributs d'un don : \n
@@ -53,7 +53,11 @@ async def creerDon(don: Don):
             *nom: str # Nom du don descriptif
             *caracteristique: str # ex Puissance
             *histoire: [str,None] # Histoire du don ( non obligatoire )
-        """
+            
+        Retourne une liste d'erreurs ( vide si pas d'erreurs)
+
+    
+    """
         
     ### Néttoyage des chaines ###
     
@@ -85,7 +89,7 @@ async def creerDon(don: Don):
     
     
     if(not creerDonDansLaBDD(don)):
-        return "Il y a eu une erreur lors de la creation du don."
+        return ["Il y a eu une erreur lors de la creation du don."]
 
     
     
@@ -100,13 +104,13 @@ async def creerDon(don: Don):
     
     
     
-    return "Le don a été crée."
+    return []
     
         
     
 
 @app.post("/ajout/arme")
-async def creerArme(arme: Arme):
+async def creerArme(arme: Arme) -> list:
     """ Route permettant de créer une arme dans la base de données
 
         Attributs arme : \n
@@ -122,6 +126,8 @@ async def creerArme(arme: Arme):
             * categories: list # Catégorise SOUS LA FORME D'UN JSON
             * nomBalise: Union[str, None] # NomBalise du don qu'il possède si existant ( peut être nul)
  
+        Retourne une liste d'erreurs ( vide si pas d'erreurs)
+
 
     """
     #### Néttoyage des chaines ####
@@ -165,12 +171,12 @@ async def creerArme(arme: Arme):
     #### Vérification de la présence de nomBalise dans la BDD ####
     
     if(arme.nomBalise is not None and not nomBaliseDansBDD(arme.nomBalise)):
-        return "Le don associé à l'arme n'existe pas."
+        return ["Le don associé à l'arme n'existe pas."]
     
     ### Creation de l'arme dans la BDD ###
     
     if(not creerArmeDansLaBDD(arme)):
-        return "Il y a eu une erreur dans la création de l'arme."
+        return ["Il y a eu une erreur dans la création de l'arme."]
    
     
 
@@ -187,11 +193,10 @@ async def creerArme(arme: Arme):
     log(f"Catégories de l'arme : {str(arme.categories)}")
     log(f"")
 
-    # Creation de l'arme dans la BDD
-    return "L'arme à bien été créée."
+    return []
 
 @app.post("/ajout/armure")
-def creerArmure(armure: Armure):
+def creerArmure(armure: Armure) -> list:
     """ Route permettant de créer une armure dans la base de données 
     
         * nom: str # Nom de l'armure
@@ -204,6 +209,7 @@ def creerArmure(armure: Armure):
         * malusArmure: int # Malus lié au poids de l'armure ( -5 = -5% )
         * nomBalise: Union[str, None] # nomBalise du don associé si présent
 
+        Retourne une liste d'erreurs ( vide si pas d'erreurs)
     """
 
     ### Nettoyage des chaînes ### 
@@ -244,6 +250,8 @@ def creerArmure(armure: Armure):
     
     ### Creation de l'armure dans la BDD ###
 
+    if(not creerArmureDansLaBDD(armure)):
+        return ["Il y a eu une erreur dans la création de l'armure."]
 
     log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'une armure")
     log(f"Nom de l'armure : {armure.nom}")
@@ -256,5 +264,7 @@ def creerArmure(armure: Armure):
     log(f"malusArmure de l'armure : {armure.malusArmure}")
     log(f"nomBalise de l'armure : {armure.nomBalise}")
     log("")
+    
+    
 
-    return "L'armure a été crée."
+    return []

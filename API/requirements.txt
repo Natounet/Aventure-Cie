@@ -3,3 +3,4 @@ pydantic
 typing
 jsonschema
 bleach
+python-decouple

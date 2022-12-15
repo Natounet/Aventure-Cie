@@ -155,21 +155,7 @@ def verificationCaracteristique(caracteristique: str) -> str:
     else:
         return ""
 
-# Non implémentée
-def verificationNomBalise(nomBalise: str) -> str:
-    """ Fonction qui vérifie dans la DB si le nom de la balise existe"""
 
-    if(not nomBaliseDansDB(nomBalise)):
-        return "Ce don n'existe pas"
-    else:
-        return ""
-
-# Non implémentée
-def nomBaliseDansDB(nomBalise: str) -> str:
-    """ Check dans la DB si nomBalise est présent """
-
-    # Non implémentée
-    return ""
 def verificationMalusArmure(malusArmure: int) -> str:
     ''' Vérifie si malusArmure est correcte '''
 
@@ -267,9 +253,6 @@ def verifications(nom: str = None, prix: float = None, critique: int = None, por
 
     if(caracteristique is not None):
         messageErreur.append(verificationCaracteristique(caracteristique))
-
-    if(nomBalise is not None):
-        messageErreur.append(verificationNomBalise(nomBalise))
 
     if(malusArmure is not None):
         messageErreur.append(verificationMalusArmure(malusArmure))

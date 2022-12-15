@@ -1,11 +1,15 @@
 #encoding:utf-8
-from fastapi import FastAPI
+from fastapi import FastAPI 
 import json
+import bleach # Sanitizer
+from datetime import datetime # Pour la date  
+
+
 
 from verifications import *
 from classes import *
-import bleach
-from datetime import datetime
+from sql import nomBaliseDansBDD
+
 app = FastAPI()
 
    
@@ -48,7 +52,7 @@ async def creerDon(don: Don):
             *nomBalise: str #nom Unique du don pour le référencer
             *nom: str # Nom du don descriptif
             *caracteristique: str # ex Puissance
-            *histoire: [str,None] # Histoire du don
+            *histoire: [str,None] # Histoire du don ( non obligatoire )
         """
         
     ### Néttoyage des chaines ###
@@ -68,12 +72,17 @@ async def creerDon(don: Don):
     
     ### Vérification que nomBalise n'est pas présent dans la BDD ###
 
+    if(nomBaliseDansBDD(don.nomBalise)):
+        messageErreur.append("Ce nom balise est déjà utilisé")
     
     # Si il y a des erreurs
     if messageErreur != []:
         return messageErreur
     
     # Si pas d'érreurs
+    
+    
+    
     
     
     ### LOG DU DON ###

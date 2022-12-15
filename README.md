@@ -6,8 +6,8 @@ Tâches a réaliser
 - [ ]     1 - Fiche perso ( Fait appel à des items des autres tables
 - [x]     2 - Dons
 - [x]     3 - Armes
-- [ ]     4 - Armures
-- [ ]     5 - Objet Magiques
+- [x]     4 - Armures
+- [x]     5 - Objet Magiques
 - [ ] : Mettre en place une recherche de fiche de personnage dans la base de données :
 - [ ]     1 - par ordre alphabétique
 - [ ]     2 - par catégories

@@ -2,9 +2,9 @@
 
 
 Tâches a réaliser
-- [ ] : Créer et mettre en place la base de données
+- [x] : Créer et mettre en place la base de données
 - [ ]     1 - Fiche perso ( Fait appel à des items des autres tables
-- [ ]     2 - Dons
+- [x]     2 - Dons
 - [ ]     3 - Armes
 - [ ]     4 - Armures
 - [ ]     5 - Objet Magiques

@@ -21,3 +21,16 @@ class Arme(BaseModel):
     categories: list # Catégorise SOUS LA FORME D'UN JSON
     nomBalise: Union[str, None] # NomBalise du don qu'il possède si existant ( peut être nul)
  
+class Armure(BaseModel):
+
+    nom: str # Nom de l'armure
+    description: Union[str,None] # Description de l'armure ( peut ne pas être présente )
+    prix: Union[float, None] # Prix de l'armure ( peut ne pas être présente )
+    poids: float # Poids de l'armure
+    armure: int # Points d'armure
+    caracteristique: str # Caractéristique dépendante de l'arme ( ex: Puissance )
+    categorie: str # Catégorie de l'armure ( type d'armure, voir config.py )
+    malusArmure: int # Malus lié au poids de l'armure ( -5 = -5% )
+    nomBalise: Union[str, None] # nomBalise du don associé si présent
+
+

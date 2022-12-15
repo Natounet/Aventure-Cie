@@ -2,7 +2,7 @@
 
 
 from jsonschema import validate
-from config import caracteristiques,categoriesArme,typeObjetsMagiques
+import config # Contient les catégories d'objets et autres configurations
 
 def schemaValide(objetJSON: list, schemaJSON) -> bool:
     """ Fonction permettant de valider un objet JSON avec un schéma
@@ -52,7 +52,7 @@ def verificationCategoriesArme(listeCategories: list) -> str:
             return "Il y a des doublons dans les catégories."
     
     for cat in categoriesFinal:
-        if cat not in categoriesArme:
+        if cat not in config.categoriesArme:
             return f"La catégorie {cat} n'éxiste pas."
                 
     return ""
@@ -94,7 +94,7 @@ def verificationNom(nom: str) -> str:
 def verificationPrix(prix: float) -> str:
     """ Vérification du prix """
     
-    if(prix < 0):
+    if(prix <= 0):
         return "Il y a un problème dans le prix."
     
     return ""
@@ -150,7 +150,7 @@ def verificationCaracteristique(caracteristique: str) -> str:
     """ Vérifie si la caractéristique entrée est dans la liste des caractéristiques existantes"""
     
     print(caracteristique)
-    if caracteristique not in caracteristiques:
+    if caracteristique not in config.caracteristiques:
         return "La caractéristique n'est pas valide."
     else:
         return ""
@@ -166,16 +166,23 @@ def verificationMalusArmure(malusArmure: int) -> str:
     else:
         return ""
 
-# Non implémentée
 def verifiationTypeObject(typeObject: str) -> str:
     """ Vérifie si le typeObject existe """
 
-    if typeObject not in typeObjetsMagiques:
+    if typeObject not in config.typeObjetsMagiques:
         return f"{typeObject} n'existe pas."
 
     return ""
 
+def verificationCategorieArmure(categorie) -> str:
+    """ Fonction vérifiant si une catégorie d'armure existe bien dans les fichiers de configurations 
+        Retourne un message d'erreur si elle n'est pas présente 
+        Retourne une chaine vide sinon """
 
+    if categorie not in config.categoriesArmures:
+        return "La catégorie d'armure n'existe pas"
+
+    return ""
 
 
 
@@ -220,7 +227,7 @@ histoire
 
 
 
-def verifications(nom: str = None, prix: float = None, critique: int = None, portee: float = None, degats: str = None, poids: float = None, armure: int = None, caracteristique: str = None, nomBalise: str = None, malusArmure: float = None, typeObject: str = None):
+def verifications(nom: str = None, prix: float = None, critique: int = None, portee: float = None, degats: str = None, poids: float = None, armure: int = None, caracteristique: str = None, malusArmure: float = None, typeObject: str = None):
     """ Fonction qui s'occupe de vérifier seulement les arguments donnés explicitement
         Pour les armes, on vérifiera que les attributs des armes 
         

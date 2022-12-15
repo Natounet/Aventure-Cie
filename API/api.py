@@ -90,7 +90,7 @@ async def creerDon(don: Don):
     
     
     ### LOG DU DON ###
-    log(f"Creation d'un don - {datetime.now().strftime('%d/%m/%Y %X')}")
+    log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'un don")
     log(f"NomBalise du don : {don.nomBalise}")
     log(f"Nom du don : {don.nom}")
     log(f"Caractéristique du don : {don.caracteristique}")
@@ -138,9 +138,6 @@ async def creerArme(arme: Arme):
         arme.nomBalise = sanitizeChaine(arme.nomBalise)
 
     arme.degats = sanitizeChaine(arme.degats)
-    
-    if(arme.prix == 0):
-        arme.prix = None
 
     #### Vérification des attributs ####
 
@@ -177,7 +174,7 @@ async def creerArme(arme: Arme):
    
     
 
-    log(f"Creation d'une arme - {datetime.now().strftime('%d/%m/%Y %X')}")
+    log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'une arme")
     log(f"Nom de l'arme : {arme.nom}")
     log(f"Description de l'arme : {arme.description}")
     log(f"Prix de l'arme : {arme.prix}")
@@ -191,7 +188,73 @@ async def creerArme(arme: Arme):
     log(f"")
 
     # Creation de l'arme dans la BDD
-
-
-
     return "L'arme à bien été créée."
+
+@app.post("/ajout/armure")
+def creerArmure(armure: Armure):
+    """ Route permettant de créer une armure dans la base de données 
+    
+        * nom: str # Nom de l'armure
+        * description: Union[str,None] # Description de l'armure ( peut ne pas être présente )
+        * prix: Union[float, None] # Prix de l'armure ( peut ne pas être présente )
+        * poids: float # Poids de l'armure
+        * armure: int # Points d'armure
+        * caracteristique: str # Caractéristique dépendante de l'arme ( ex: Puissance )
+        * categorie: str # Catégorie de l'armure ( type d'armure, voir config.py )
+        * malusArmure: int # Malus lié au poids de l'armure ( -5 = -5% )
+        * nomBalise: Union[str, None] # nomBalise du don associé si présent
+
+    """
+
+    ### Nettoyage des chaînes ### 
+
+    armure.nom = bleach.clean(armure.nom)
+
+    if armure.description is not None:
+        armure.description = bleach.clean(armure.description)
+    
+    armure.caracteristique = bleach.clean(armure.caracteristique).capitalize()
+    armure.categorie = bleach.clean(armure.categorie).capitalize()
+
+    if armure.nomBalise is not None:
+        armure.nomBalise = bleach.clean(armure.nomBalise)
+
+    ### Vérification des attributs
+
+    messageErreur = verifications(nom=armure.nom, prix=armure.prix, poids=armure.poids, armure=armure.armure, caracteristique=armure.caracteristique, malusArmure=armure.malusArmure)
+
+    if (verificationCategorieArmure(armure.categorie) != ""): # Si erreur
+        messageErreur.append(verificationCategorieArmure(armure.categorie))
+
+    if(armure.description is not None):
+        if(not verificationTailleChaine(armure.description,1,1000)):
+            messageErreur.append("La taille de la description est actuellement limitée à 1000 caractères")
+
+        
+    #### Vérification de la présence de nomBalise dans la BDD ####
+    
+    if(armure.nomBalise is not None and not nomBaliseDansBDD(armure.nomBalise)):
+        messageErreur.append("Le don associé à l'arme n'existe pas.")
+    
+    ### Cas d'erreurs
+
+    if messageErreur != []:
+        return messageErreur
+
+    
+    ### Creation de l'armure dans la BDD ###
+
+
+    log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'une arme")
+    log(f"Nom de l'armure : {armure.nom}")
+    log(f"Description de l'armure : {armure.description}")
+    log(f"Prix de l'armure : {armure.prix}")
+    log(f"Poids de l'armure : {armure.poids}")
+    log(f"Armure de l'armure : {armure.armure}")
+    log(f"Caracteristique de l'armure : {armure.caracteristique}")
+    log(f"Catégorie de l'armure : {armure.categorie}")
+    log(f"malusArmure de l'armure : {armure.malusArmure}")
+    log(f"nomBalise de l'armure : {armure.nomBalise}")
+    log("")
+
+    return "L'armure a été crée."

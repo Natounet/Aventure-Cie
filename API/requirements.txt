@@ -4,3 +4,5 @@ typing
 jsonschema
 bleach
 python-decouple
+mysql
+mysql-connector

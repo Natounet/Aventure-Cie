@@ -1,5 +1,5 @@
-create database compagnieCie;
-use compagnieCie;
+create database aventureCie;
+use aventureCie;
 
 -- Creation de la table des dons
 

@@ -1,4 +1,4 @@
-USE compagnieCie;
+USE aventureCie;
 
 CREATE TABLE IF NOT EXISTS armes(
     id int not null AUTO_INCREMENT PRIMARY KEY, -- ID unique de l'arme

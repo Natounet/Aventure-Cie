@@ -1,4 +1,4 @@
-USE compagnieCie;
+USE aventureCie;
 
 CREATE TABLE IF NOT EXISTS objetsMagiques(
 

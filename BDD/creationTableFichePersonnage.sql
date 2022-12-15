@@ -1,4 +1,4 @@
-USE compagnieCie;
+USE aventureCie;
 
 CREATE TABLE IF NOT EXISTS fichePersonnage(
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,

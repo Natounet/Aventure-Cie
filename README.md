@@ -8,6 +8,7 @@ Tâches a réaliser
 - [x]     3 - Armes
 - [x]     4 - Armures
 - [x]     5 - Objet Magiques
+- [ ]     6 - Divers
 - [ ] : Mettre en place une recherche de fiche de personnage dans la base de données :
 - [ ]     1 - par ordre alphabétique
 - [ ]     2 - par catégories
@@ -25,7 +26,7 @@ Tâches a réaliser
 Choix des technologies : 
   - BDD : Mysql
   - FRONT : Svelte
-  - BACK : FastAPI
+  - BACK : FastAPI + Svelte kit
  
 Docker puis Google Cloud
 

@@ -25,7 +25,7 @@ Tâches a réaliser
 Choix des technologies : 
   - BDD : Mysql
   - FRONT : Svelte
-  - BACK : FastAPI
+  - BACK : FastAPI + Svelte kit
  
 Docker puis Google Cloud
 

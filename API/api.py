@@ -13,7 +13,7 @@ from sql import *
 app = FastAPI()
 
    
-with open('jsonSchemas/categoriesSchema.json','r') as f:
+with open('jsonSchemas/schemaCategoriesArmes.json','r') as f:
     categoriesSchema = json.load(f)
     
     

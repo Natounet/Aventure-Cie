@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "title": "Categories",
-    "description": "Schema for validating categories",
+    "description": "Schéma pour les catégories d'armes",
     "type": "array",
     "items": {
         "type": "string"

@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Schéma des caractéristiques de personnages",
+    "type":"object",
+    "properties": {
+        "puissance":{
+            "description": "Points de puissance d'un personnage",
+            "type":"number",
+            "exclusiveMinimum": 0
+        },
+        "finesse":{
+            "description": "Points de finesse d'un personnage",
+            "type":"number",
+            "exclusiveMinimum": 0
+        },
+        "vigeur":{
+            "description": "Points de vigueur d'un personnage",
+            "type":"number",
+            "exclusiveMinimum": 0
+        },
+        "savoir":{
+            "description": "Points de savoir d'un personnage",
+            "type":"number",
+            "exclusiveMinimum": 0
+        },
+        "instinct":{
+            "description": "Points d'instinct d'un personnage",
+            "type":"number",
+            "exclusiveMinimum": 0
+        },
+        "social":{
+            "description": "Points social d'un personnage",
+            "type":"number",
+            "exclusiveMinimum": 0
+        },
+        "stress":{
+            "description": "Points de stress d'un personnage",
+            "type":"number",
+            "exclusiveMinimum": 0
+        }
+    },
+    "required": ["puissance","finesse","vigueur","savoir","instinct","social","stress"]
+}
+
+
+
+
+
+

@@ -2,12 +2,13 @@
     import { fade } from "svelte/transition";
     import { cubicOut } from 'svelte/easing';
     import { inview } from 'svelte-inview';
+    import { goto } from "$app/navigation";
     export let title;
+    export let link;
 
     let isInView;
 
     function test (node, params) {
-        console.log("coucou");
         const existingTransform = getComputedStyle(node).transform.replace('none', '');
 
 		return {
@@ -28,9 +29,12 @@ on:change={({ detail }) => {
     {#if isInView}
         <div
         transition:test
+        on:click={() => goto(link)}
+        on:keydown={() => goto(link)}
         class="w-[50vw] sm:w-[30vw] md:w-[25vw] bg-white rounded-[6vh] text-center
         font-fredoka justify-between drop-shadow-card flex flex-col
-        hover:scale-110 hover:-rotate-6 transition-all 
+        hover:scale-110 hover:-rotate-6 transition-all
+        cursor-pointer 
         ">
             <div class="text-center w-full min-h-[8vh] rounded-tl-[6vh] rounded-tr-[6vh] border-b-[1px] 
             border-boring-gray border-dashed relative transition-colors">

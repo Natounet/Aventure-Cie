@@ -1,6 +1,8 @@
 <script>
     import Card from "./card.svelte";
-    import { navigate } from '@svelte-kit/router';
+    // import { navigate } from "../navigate";
+
+    import { goto } from '$app/navigation';
 </script>
 
 <main>
@@ -12,7 +14,7 @@
     </section>
     
     <section class="w-full relative bg-primary-light sm:h-[100vh] h-[200vh] flex sm:flex-row flex-col justify-around items-center z-10">
-        <Card title="Bestiaire" on:click={navigate("/bestiaire")}>
+        <Card title="Bestiaire" link="/bestiaire">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Error tenetur voluptatibus laudantium repellat exercitationem! Fuga porro esse rerum praesentium ut?
         </Card>
         <Card title="Créateur de personnage">

@@ -4,6 +4,7 @@
     "description": "Schéma pour les catégories d'armes",
     "type": "array",
     "items": {
+        "description": "catégorie d'armes",
         "type": "string"
     },
     "minItems": 1,

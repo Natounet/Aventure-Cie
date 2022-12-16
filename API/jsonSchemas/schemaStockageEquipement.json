@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title":"Schéma pour la validation des Equipements/Inventaire/Loot Possible",
+    "type":"object",
+    "properties": {
+        "armes":{
+            "description": "id des armes",
+            "type":"integer",
+            "items": {
+                "type":"string"
+                
+            }
+        },
+        "divers":{
+            "description": "id des objets divers",
+            "type":"array",
+            "items": {
+                "type":"integer"
+            }
+        },
+        "armures":{
+            "description": "id des armures",
+            "type":"array",
+            "items": {
+                "type":"integer"
+            }
+        },
+        "objetsMagiques":{
+            "description": "id des objets magiques",
+            "type":"array",
+            "items": {
+                "type":"integer"
+            }
+        }
+    }
+}

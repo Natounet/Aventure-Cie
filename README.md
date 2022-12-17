@@ -3,7 +3,7 @@
 
 Tâches a réaliser
 - [x] : Créer et mettre en place la base de données
-- [ ]     1 - Fiche perso ( Fait appel à des items des autres tables
+- [x]     1 - Fiche perso ( Fait appel à des items des autres tables
 - [x]     2 - Dons
 - [x]     3 - Armes
 - [x]     4 - Armures

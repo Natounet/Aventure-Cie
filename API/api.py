@@ -429,6 +429,8 @@ async def creerObjetDivers(objetdiv: classes.objetDivers) -> list:
         return messageErreur
 
     ### Sinon création de l'objet divers dans la BDD ###
+    
+    creerObjetDiversDansLaBDD(objetdiv)
 
     log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'un objet divers")
     log(f"Nom de l'objet divers: {objetdiv.nom}")

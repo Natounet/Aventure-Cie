@@ -178,9 +178,9 @@ def creerArmureDansLaBDD(armure: classes.Armure) -> bool:
     return False
 
 def creerObjetMagiqueDansLaBDD(objetMagique: classes.objetMagique) -> bool:
-    """ Fonction permettant de créer une armure dans la base de données
-        Prends en paramètre un objet armure
-        Retourne true si l'armure a été crée
+    """ Fonction permettant de créer un objet magique dans la base de données
+        Prends en paramètre un objet magique
+        Retourne true si l'objet a été crée
         False sinon 
         
         
@@ -231,3 +231,46 @@ def creerObjetMagiqueDansLaBDD(objetMagique: classes.objetMagique) -> bool:
         
     return False
 
+
+def creerObjetDiversDansLaBDD(objetDiv: classes.objetDivers) -> bool:
+    """ Fonction permettant de créer un objet divers dans la base de données
+        Prends en paramètre un objet divers
+        Retourne true si l'objet a été crée
+        False sinon 
+        
+        * nom: str # nom de l'objet divers
+        * description: Union[str, None] # Dénomination de 'l'objet
+        * prix: Union[float, None] # Description de l'objet
+        * taille: float # Prix de l'objet
+        * poids: float # Poids de l'objet
+        * armure: Union[int, None] # Points d'armure dans des cas précis
+    """
+    
+    connexion = connexionBDD()
+    
+    if connexion is not None:
+        try:
+            
+            cursor = connexion.cursor()
+            
+            query = """ INSERT INTO objetsDivers
+                        (nom,description,prix,taille,poids,armure)
+                        VALUES(%(nom)s,%(description)s,%(prix)s,%(taille)s,%(poids)s,%(armure)s);"""
+            
+            params = {"nom":objetDiv.nom,"description":objetDiv.description,"prix":objetDiv.prix,"taille":objetDiv.taille,
+                      "poids":objetDiv.poids,"armure":objetDiv.armure}
+            
+            cursor.execute(query,params)
+            
+            connexion.commit()
+            
+            connexion.close()
+            
+            return True
+        
+        except (DatabaseError, InterfaceError) as Error:
+            print(Error)
+            connexion.close()
+            return False
+    
+    return False

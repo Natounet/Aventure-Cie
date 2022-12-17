@@ -560,3 +560,19 @@ Taille de l'objet divers: 0.1
 Poids de l'objet divers: 0.1
 Armure de l'objet divers: None
 
+17/12/2022 15:17:38 - Creation d'un objet divers
+Nom de l'objet divers: Tente
+Description de l'objet divers: une simple tente
+Prix de l'objet divers: 10.0
+Taille de l'objet divers: 2.0
+Poids de l'objet divers: 5.0
+Armure de l'objet divers: None
+
+17/12/2022 15:18:33 - Creation d'un objet divers
+Nom de l'objet divers: Tente
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 2.0
+Poids de l'objet divers: 5.0
+Armure de l'objet divers: None
+

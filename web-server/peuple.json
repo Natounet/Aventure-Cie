@@ -1,0 +1,16 @@
+{
+    "peuple":"nain",
+    "psy":8,
+    "pv":21,
+    "pouvoires":[
+        ["Vision dans le noir ","Vision parfaite dans une pénombre absolue"],
+        ["Réflexe Nain","Un savoir-faire dans une compétence d’Instinct"],
+        ["Stabilité","Grâce à sa corpulence, un nain possède +5% au test de Puissance et de Vigueur pour un jet d’opposition."],
+        ["Nemesis","Le nain choisit un peuple qui sera considéré comme son ennemi juré. Il gagne un bonus de +5% à ses tests contre les protagonistes de cette nation."],
+        ["Robustesse","Encaisse, sans prendre de dégâts, la première attaque physique reçue par combat"]
+    ],
+    "a_repartir":[
+        [-10,["Puissance", "Finesse", "Savoir", "Social"]]
+    ]
+    
+}

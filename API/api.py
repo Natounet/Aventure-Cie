@@ -9,12 +9,25 @@ from datetime import datetime # Pour la date
 from verifications import *
 from classes import *
 from sql import *
+import config
 
 app = FastAPI()
 
    
 with open('jsonSchemas/schemaCategoriesArmes.json','r') as f:
     categoriesSchema = json.load(f)
+    
+with open('jsonSchemas/schemaDonsPerso.json','r') as f:
+    donsPersoSchema = json.load(f)
+    
+with open('jsonSchemas/schemaStockageEquipement.json','r') as f:
+    stockageEquipementSchema = json.load(f)
+    
+with open('jsonSchemas/schemaCompetencesPerso.json','r') as f:
+    competencesPersoSchema = json.load(f)
+    
+with open('jsonSchemas/schemaCaracteristiquePerso.json','r') as f:
+    caracteristiquesPersoSchema = json.load(f)
     
     
     
@@ -442,3 +455,209 @@ async def creerObjetDivers(objetdiv: classes.objetDivers) -> list:
     log("")
 
     return []
+
+@app.post("/ajout/Perso")
+async def creerPerso(perso: Perso) -> list:
+    """
+    
+    Les attributs : 
+        * nom: str # Nom du personnage
+        * langues: list # Langues parlées par le personnage
+        * taille: float # Taille du personnage
+        * poids: float # Poids du personnage
+        * age: int # Age du personnage
+        * peuple: str # Peuple du personnage
+        * niveau: int # Niveau du personnage
+        * biome: str # Biome du personnage
+        * caracteristiques: dict # Caractéristiques du personnages ( Puissance, Vigueur, ..)
+        * pointVie: int # Points de vie
+        * pointPsyche: int # Points de psyché
+        * armure: int # Points d'armure
+        * positionBase: Union[str, None] # Position de base du personnage si indiqué
+        * competences: list # Compétences du personnage + caracterisitque liée ( Puissance, Vigueur )
+        * lootPossible: dict # loot possible du personnage
+        * inventaire: dict # Inventaire du personnage
+        * equipement: dict # Equipement du personnage
+        * facteurPuissance: int # Facteur de puissance
+        * dons: list # Dons du personnage
+        * description: Union[str, None] # Description si existante du personnage
+        
+        Inventaire/Equipement/LootPossible:
+        {
+        "armes": [1, 2, 3],
+        "divers": [
+        {
+        "id": 4,
+        "quantite": -2
+        },
+        {
+        "id": 5,
+        "quantite": 1
+        }
+        ],
+        "armures": [6, 7],
+        "objetsMagiques": [8, 9]
+        }
+        
+        Caractéristiques:
+        {
+        "puissance": 10,
+        "finesse": 5,
+        "vigueur": 8,
+        "savoir": 9,
+        "instinct": 6,
+        "social": 7,
+        "stress": 3
+        }
+        
+        Compétences:
+        [        
+        {
+        "nomCompetence": "Escalade",
+        "caracteristique": "Puissance"
+        },
+        {
+        "nomCompetence": "Discretion",
+        "caracteristique": "Finesse"
+        },
+        {
+        "nomCompetence": "Natation",
+        "caracteristique": "Vigueur"
+        },
+        {
+        "nomCompetence": "Connaissances en herbes",
+        "caracteristique": "Savoir"
+        }
+        ]
+        
+        Dons:
+        ["nomBalise1","nomBalise2"]
+    """
+
+    ### Nettoyage des chaines ###
+
+    perso.nom = sanitizeChaine(perso.nom)
+    
+    for langue in perso.langues:
+        perso.langues = sanitizeChaine(langue)
+
+    perso.peuple = sanitizeChaine(perso.peuple)
+    perso.biome = sanitizeChaine(perso.biome)
+    
+    if perso.description is not None:
+        perso.description = sanitizeChaine(perso.description)
+        
+    if perso.positionBase is not None:
+        perso.positionBase = sanitizeChaine(perso.positionBase).capitalize()
+
+    ### Vérification des attributs ###
+    
+    messageErreur = verifications(nom=perso.nom,poids=perso.poids, armure=perso.armure)
+
+    # Taille
+    if perso.taille < 0:
+        messageErreur.append("La taille entrée n'est pas correcte.")
+        
+    # Langues
+    for langue in perso.langues:
+        if (not verificationTailleChaine(langue,1,30)):
+            messageErreur.append("Certaines langues sont trop longues.")
+    # Age
+    if perso.age < 0:
+        messageErreur.append("L'age d'un personnage ne peut être négatif.")
+    
+    # Peuple
+    if(not verificationTailleChaine(perso.peuple,1,30)):
+        messageErreur.append("La taille du peuple du personnage doit être comprise entre 1 et 30 caractères.")
+    
+    # Niveau
+    if(perso.niveau < 0):
+        messageErreur.append("Le niveau d'un personnage ne peut être négatif.")
+    
+    # Biome
+    if(not verificationTailleChaine(perso.biome, 1,30)):
+        messageErreur.append("La taille du biome doit être entre 1 et 30 caractères.")
+        
+    # Caractéristiques
+    if (not schemaValide(perso.caracteristiques,caracteristiquesPersoSchema)):
+        messageErreur.append("Les caractéristiques du personnage ne correspondent pas avec le schéma type.")
+    
+    # Psyche
+    if (perso.pointPsyche < 0):
+        messageErreur.append("Les points de psyche ne peuvent pas être négatifs.")
+    
+    # PV
+    if(perso.pointVie < 0):
+        messageErreur.append("Les points de vie du personnage ne peuvent pas être négatifs.")
+        
+    # positionBase
+    if perso.positionBase is not None:
+        if perso.positionBase not in config.positionsBase:
+            messageErreur.append(f"La position {perso.positionBase} n'existe pas dans les fichiers de configurations.")
+        if (not verificationTailleChaine(perso.positionBase,1,30)):
+            messageErreur.append("La taille de la position de base doit être comprise entre 1 et 30 caractères.")
+    
+    # Compétences
+    if(not schemaValide(perso.competences,competencesPersoSchema)):
+        messageErreur.append("Les compétences du personnage ne correspondent pas avec le schéma type.")
+    else:
+        for competence in perso.competences:
+            competence['caracteristique'] = competence['caracteristique'].capitalize()
+            
+            if(not verificationTailleChaine(competence['nomCompetence'],1,30)):
+                messageErreur.append("La taille d'un nom de compétence est trop élevé.")
+            if(competence['caracteristique'] not in config.caracteristiques):
+                messageErreur.append("La caractéristique d'une des compétences n'est pas valide.")
+    
+    # Facteur puissance
+    if(perso.facteurPuissance < 1 or perso.facteurPuissance > 30):
+        messageErreur.append("Le facteur de puissance doit être compris entre 1 et 30.")
+    
+    # Description
+    if perso.description is not None:
+        if (not verificationTailleChaine(perso.description,1,1000)):
+            messageErreur.append("La taille de la description doit être comprise entre 1 et 1000 caractères.") 
+            
+    # Loot
+    if (not schemaValide(perso.lootPossible,stockageEquipementSchema)):
+        messageErreur.append("Le format des loots ne correspond pas au schéma type")
+    else:
+        if(verificationStockage(perso.lootPossible) != []):
+            messageErreur.append("lootPossible :")
+            messageErreur.append(verificationStockage(perso.lootPossible)) 
+
+    # Equipement
+    if (not schemaValide(perso.equipement,stockageEquipementSchema)):
+        messageErreur.append("Le format de l'équipement ne correspond pas au schéma type")
+    else:
+        if(verificationStockage(perso.equipement) != []):
+            messageErreur.append("Equipement :")
+            messageErreur.append(verificationStockage(perso.equipement)) 
+    # Inventaire
+    if (not schemaValide(perso.inventaire,stockageEquipementSchema)):
+        messageErreur.append("Le format de l'inventaire ne correspond pas au schéma type.")
+    else:
+        if(verificationStockage(perso.inventaire) != []):
+            messageErreur.append("Inventaire :")
+            messageErreur.append(verificationStockage(perso.inventaire)) 
+            
+    # Dons
+    
+    if (not schemaValide(perso.dons, donsPersoSchema)):
+        messageErreur.append("Le format des dons ne correspond pas au schéma type.")   
+    else:
+        for nomBalise in perso.dons:
+            if not nomBaliseDansBDD(nomBalise):
+                messageErreur.append(f"nomBalise: {nomBalise} n'existe pas.")
+            
+    if messageErreur != []:
+        return messageErreur
+    
+    
+    ### Création du personnage
+
+    if(not creerPersonnageDansBDD(perso)):
+        messageErreur.append("Il y a eu une erreur lors de la création du personnage.")
+    
+    return messageErreur
+    

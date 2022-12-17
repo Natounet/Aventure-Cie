@@ -1,0 +1,84 @@
+{
+    "nom": "Dark Vador",
+    "langues": [
+      "français","anglais"
+    ],
+    "taille": 1.78,
+    "poids": 76,
+    "age": 55,
+    "peuple": "Sith",
+    "niveau": 50,
+    "biome": "Jungle",
+    "caracteristiques": {
+          "puissance": 10,
+          "finesse": 5,
+          "vigueur": 8,
+          "savoir": 9,
+          "instinct": 6,
+          "social": 7,
+          "stress": 3
+          },
+    "pointVie": 20,
+    "pointPsyche": 10,
+    "armure": 15,
+    "positionBase": "offensif",
+    "competences": [
+      {
+          "nomCompetence": "Escalade",
+          "caracteristique": "puissance"
+          },
+  {
+          "nomCompetence": "Escalade",
+          "caracteristique": "Puissance"
+          }
+    ],
+    "lootPossible": {
+          "armes": [1, 2, 3],
+          "divers": [
+          {
+          "id": 1,
+          "quantite": 1
+          },
+          {
+          "id": 2,
+          "quantite": 1
+          }
+          ],
+          "armures": [1, 2],
+          "objetsMagiques": [1, 2]
+          },
+    "inventaire": {
+          "armes": [1, 2, 3],
+          "divers": [
+          {
+          "id": 1,
+          "quantite": 1
+          },
+          {
+          "id": 2,
+          "quantite": 1
+          }
+          ],
+          "armures": [1, 2],
+          "objetsMagiques": [1, 2]
+          },
+    "equipement": {
+          "armes": [1, 2, 3],
+          "divers": [
+          {
+          "id": 1,
+          "quantite": 1
+          },
+          {
+          "id": 2,
+          "quantite": 1
+          }
+          ],
+          "armures": [1, 2],
+          "objetsMagiques": [1, 2]
+          },
+    "facteurPuissance": 30,
+    "dons": [
+      "superdon","superdon2"
+    ]
+  }

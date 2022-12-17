@@ -7,11 +7,11 @@ CREATE TABLE IF NOT EXISTS fichePersonnage(
     taille float NOT NULl, -- Taille en mètres
     poids float NOT NULL, -- Poids en kilogrammes
     age int NOT NULL, -- Age ( entre 8 et 600 ans)
-    sexe varchar(20) NOT NULL, -- Peuple du personnage
+    peuple varchar(20) NOT NULL, -- Peuple du personnage
     niveau int NOT NULL, -- Niveau de montre / personnage
     biome varchar(100) NOT NULL, -- Biome
     caracteristiques JSON NOT NULL, -- Caractéristiques sous forme de JSON, voir persoCara.json
-    pv int NOT NULL, -- Points de vie
+    pointVie int NOT NULL, -- Points de vie
     pointPsyche int NOT NULL, -- Points de psyche
     armure int NOT NULL, -- Points armure
     positionBase varchar(100), -- Position de base ( Offensive, Defensive, ...)

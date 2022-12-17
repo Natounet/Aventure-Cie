@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,Json
 from typing import Union # Permet de définir plusieurs types possible à une variable
-
-
+from fastapi import UploadFile
 class Don(BaseModel):
     nom: str # Nom descriptif du don
     nomBalise: str # nom unique du don
@@ -56,3 +55,25 @@ class objetDivers(BaseModel):
     armure: Union[int, None] # Points d'armure dans des cas précis
 
 
+class Perso(BaseModel):
+    nom: str # Nom du personnage
+    langues: list # Langues parlées par le personnage
+    taille: float # Taille du personnage
+    poids: float # Poids du personnage
+    age: int # Age du personnage
+    peuple: str # Peuple du personnage
+    niveau: int # Niveau du personnage
+    biome: str # Biome du personnage
+    caracteristiques: dict # Caractéristiques du personnages ( Puissance, Vigueur, ..)
+    pointVie: int # Points de vie
+    pointPsyche: int # Points de psyché
+    armure: int # Points d'armure
+    positionBase: Union[str, None] # Position de base du personnage si indiqué
+    competences: list # Compétences du personnage + caracterisitque liée ( Puissance, Vigueur )
+    lootPossible: dict # loot possible du personnage
+    inventaire: dict # Inventaire du personnage
+    equipement: dict # Equipement du personnage
+    facteurPuissance: int # Facteur de puissance
+    dons: list # Dons du personnage
+    description: Union[str, None] # Description si existante du personnage
+        

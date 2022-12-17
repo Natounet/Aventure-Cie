@@ -12,10 +12,21 @@
             }
         },
         "divers":{
-            "description": "id des objets divers",
+            "description": "id et quantite des objets divers",
             "type":"array",
             "items": {
-                "type":"integer"
+                "type":"object",
+                "properties": {
+                    "id":{
+                        "description": "id de l'objet divers",
+                        "type":"integer"
+                    },
+                    "quantite":{
+                        "description": "quantité de l'objet associé",
+                        "type":"integer",
+                        "exclusiveMinimum": 0
+                    }
+                }
             }
         },
         "armures":{

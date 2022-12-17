@@ -47,3 +47,12 @@ class objetMagique(BaseModel):
     typeObjet: str # Type de l'objet magique exemple : lunette, bottes, ...
     nomBalise: Union[str, None] # nom du don lié à l'objet ( peut ne pas être donné)
 
+class objetDivers(BaseModel):
+    nom: str # nom de l'objet divers
+    description: Union[str, None] # Dénomination de 'l'objet
+    prix: Union[float, None] # Description de l'objet
+    taille: float # Prix de l'objet
+    poids: float # Poids de l'objet
+    armure: Union[int, None] # Points d'armure dans des cas précis
+
+

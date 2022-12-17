@@ -5,9 +5,9 @@
     "properties": {
         "armes":{
             "description": "id des armes",
-            "type":"integer",
+            "type":"array",
             "items": {
-                "type":"string"
+                "type":"integer"
                 
             }
         },
@@ -23,8 +23,7 @@
                     },
                     "quantite":{
                         "description": "quantité de l'objet associé",
-                        "type":"integer",
-                        "exclusiveMinimum": 0
+                        "type":"integer"
                     }
                 }
             }
@@ -43,5 +42,6 @@
                 "type":"integer"
             }
         }
-    }
+    },
+    "required": ["armes","divers","armures","objetsMagiques"]
 }

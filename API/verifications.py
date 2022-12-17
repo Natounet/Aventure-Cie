@@ -3,6 +3,7 @@
 
 from jsonschema import validate
 import config # Contient les catégories d'objets et autres configurations
+from sql import *
 
 def schemaValide(objetJSON: list, schemaJSON) -> bool:
     """ Fonction permettant de valider un objet JSON avec un schéma
@@ -56,6 +57,36 @@ def verificationCategoriesArme(listeCategories: list) -> str:
             return f"La catégorie {cat} n'éxiste pas."
                 
     return ""
+
+def verificationStockage(stockage: dict) -> list:
+    """ Fonction permettant de vérifier les json inventaire/equipement/loot possible
+        Retourne une liste contenant les erreurs, vide sionm """        
+    
+    messageErreur = []
+    
+    for idArme in stockage['armes']:
+        if(not idArmeDansBDD(idArme)):
+            messageErreur.append(f"Problème id arme : {idArme}")
+    
+    for idArmure in stockage['armures']:
+        if(not idArmureDansBDD(idArmure)):
+            messageErreur.append(f"Problème id armure : {idArmure}")
+        
+    for Divers in stockage['divers']:
+        if(Divers['quantite'] <= 0):
+            messageErreur.append(f"Problème de quantité pour l'id {Divers['id']}")
+        elif(not idObjetDiversDansBDD(Divers['id'])):
+            messageErreur.append(f"Problème id divers : {Divers['id']}")
+    
+    
+    for idMagique in stockage['objetsMagiques']:
+        if(not idObjetMagiquesDansBDD(idMagique)):
+            messageErreur.append(f"Problème id objetMagiques : {idMagique}")
+
+        
+    return messageErreur
+        
+    
         
     
 
@@ -240,3 +271,5 @@ def verifications(nom: str = None, prix: float = None, critique: int = None, por
    
     cleanMessageErreur = [ x for x in messageErreur if x != "" ]
     return cleanMessageErreur
+
+

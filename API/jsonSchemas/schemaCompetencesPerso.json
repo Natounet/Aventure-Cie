@@ -10,7 +10,7 @@
                 "description": "Nom de la compétence",
                 "minLength":1
             },
-            "caractéristique":{
+            "caracteristique":{
                 "type":"string",
                 "description": "caracteristique à laquelle la compétence est rattachée",
                 "minLength":1

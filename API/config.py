@@ -17,3 +17,7 @@ categoriesArmures = ["Cuir","Catalus","Corium","Fer","Acier","Platine","Brunneis
 # Liste des utilisations possibles
 
 utilisationPossible = ["Heure","Jour","Semaine","Mois","Année"]
+
+# Liste des positions existantes
+
+positionsBase = ["Défensif","Offensif","Chanceux","Concentration"]

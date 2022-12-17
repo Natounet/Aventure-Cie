@@ -2,6 +2,7 @@ from mysql.connector import connect, DatabaseError, InterfaceError, MySQLConnect
 from decouple import config # Pour récuperer des variables d'environnement
 import json
 import classes
+
 """ Cette classe s'occupe de tout ce qui est en lien avec la base de données 
     Gère la connexion et fait les requêtes """
 
@@ -52,6 +53,72 @@ def nomBaliseDansBDD(nomBaliseEntree: str) -> bool:
         
     return False # Une erreur s'est produite
         
+def idArmeDansBDD(idArme: int) -> bool:
+    
+    connexion = connexionBDD()
+    if connexion is not None:
+        cursor = connexion.cursor()
+        cursor.execute("SELECT id FROM armes WHERE id=%(idArme)s",{'idArme':idArme})
+        
+        if cursor.fetchall() != []: # nom balise présent dans la table
+            connexion.close()
+            return True
+                
+        connexion.close() # Fermeture de la connexion
+        return False # Nom balise non présent dans la table
+        
+    return False # Une erreur s'est produite
+
+def idArmureDansBDD(idArmure: int) -> bool:
+    
+    connexion = connexionBDD()
+    if connexion is not None:
+        cursor = connexion.cursor()
+        cursor.execute("SELECT id FROM armures WHERE id=%(idArmure)s",{'idArmure':idArmure})
+        
+        if cursor.fetchall() != []: # nom balise présent dans la table
+            connexion.close()
+            return True
+                
+        connexion.close() # Fermeture de la connexion
+        return False # Nom balise non présent dans la table
+        
+    return False # Une erreur s'est produite
+
+
+def idObjetMagiquesDansBDD(idObjetsMagiques: int) -> bool:
+    
+    connexion = connexionBDD()
+    if connexion is not None:
+        cursor = connexion.cursor()
+        cursor.execute("SELECT id FROM objetsMagiques WHERE id=%(idObjetsMagiques)s",{'idObjetsMagiques':idObjetsMagiques})
+        
+        if cursor.fetchall() != []: # nom balise présent dans la table
+            connexion.close()
+            return True
+                
+        connexion.close() # Fermeture de la connexion
+        return False # Nom balise non présent dans la table
+        
+    return False # Une erreur s'est produite
+
+
+def idObjetDiversDansBDD(idObjetDivers: int) -> bool:
+    
+    connexion = connexionBDD()
+    if connexion is not None:
+        cursor = connexion.cursor()
+        cursor.execute("SELECT id FROM objetsDivers WHERE id=%(idObjetDivers)s",{'idObjetDivers':idObjetDivers})
+        
+        if cursor.fetchall() != []: # nom balise présent dans la table
+            connexion.close()
+            return True
+                
+        connexion.close() # Fermeture de la connexion
+        return False # Nom balise non présent dans la table
+        
+    return False # Une erreur s'est produite
+
 
 def creerDonDansLaBDD(don: classes.Don) -> bool:
     """ Fonction permettant d'ajouter un don dans la base de donnée 
@@ -273,4 +340,72 @@ def creerObjetDiversDansLaBDD(objetDiv: classes.objetDivers) -> bool:
             connexion.close()
             return False
     
+    return False
+
+
+def creerPersonnageDansBDD(perso: classes.Perso) -> bool:
+    """ Fonction permettant de créer un personnage dans la base de données
+        Prends en paramètre un personnage
+        Retourne true si le personnage a été crée
+        False sinon 
+        
+        
+        * nom: str # Nom du personnage
+        * langues: list # Langues parlées par le personnage
+        * taille: float # Taille du personnage
+        * poids: float # Poids du personnage
+        * age: int # Age du personnage
+        * peuple: str # Peuple du personnage
+        * niveau: int # Niveau du personnage
+        * biome: str # Biome du personnage
+        * caracteristiques: dict # Caractéristiques du personnages ( Puissance, Vigueur, ..)
+        * pointVie: int # Points de vie
+        * pointPsyche: int # Points de psyché
+        * armure: int # Points d'armure
+        * positionBase: Union[str, None] # Position de base du personnage si indiqué
+        * competences: list # Compétences du personnage + caracterisitque liée ( Puissance, Vigueur )
+        * lootPossible: dict # loot possible du personnage
+        * inventaire: dict # Inventaire du personnage
+        * equipement: dict # Equipement du personnage
+        * facteurPuissance: int # Facteur de puissance
+        * dons: list # Dons du personnage
+        * description: Union[str, None] # Description si existante du personnage
+        
+    """    
+    
+    connexion = connexionBDD()
+    
+    if connexion is not None:
+        
+        try:
+            cursor = connexion.cursor()
+            
+            query = """
+                        INSERT INTO fichePersonnage(
+                            nom,langues,taille,poids,age,peuple,niveau,biome,caracteristiques,
+                            pointVie,pointPsyche,armure,positionBase,competences,lootPossible, inventaire,
+                            equipement,facteurPuissance,dons,description)
+                        VALUES(
+                            %(nom)s,%(langues)s,%(taille)s,%(poids)s,%(age)s,%(peuple)s,%(niveau)s,%(biome)s,%(caracteristiques)s
+                            ,%(pointVie)s,%(pointPsyche)s,%(armure)s,%(positionBase)s,%(competences)s
+                            ,%(lootPossible)s,%(inventaire)s,%(equipement)s,%(facteurPuissance)s,%(dons)s,%(description)s);"""
+                            
+            params = {"nom":perso.nom,"langues":json.dumps(perso.langues),"taille":perso.taille,"poids":perso.poids,"age":perso.age,"peuple":perso.peuple,
+                      "niveau":perso.niveau,"biome":perso.biome,"caracteristiques":json.dumps(perso.caracteristiques),"pointVie":perso.pointVie,
+                      "pointPsyche":perso.pointPsyche,"armure":perso.armure,"positionBase":perso.positionBase,"competences":json.dumps(perso.competences),
+                      "lootPossible":json.dumps(perso.lootPossible),"inventaire":json.dumps(perso.inventaire),"equipement":json.dumps(perso.equipement),
+                      "facteurPuissance":perso.facteurPuissance,"dons":json.dumps(perso.dons),"description":perso.description}
+            
+            cursor.execute(query,params)
+            
+            connexion.commit()
+            
+            connexion.close()
+            
+            return True
+        except (DatabaseError, InterfaceError) as Error:
+            print("Erreur lors de la création d'un personnage :" + str(Error))
+            connexion.close()
+            return False
+        
     return False

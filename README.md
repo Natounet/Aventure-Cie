@@ -92,6 +92,17 @@ objetsMagiques{
     varchar nomBalise
 }
 
+objetsDivers{
+    int id
+    varchar nom
+    text description
+    float prix
+    float taille
+    float poids
+    int armure
+    
+}
+
 fichePersonnage{
     int id
     varchar nom

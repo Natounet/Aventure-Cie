@@ -1,4 +1,4 @@
-create database aventureCie;
+create database if not exists aventureCie;
 use aventureCie;
 
 -- Creation de la table des dons
@@ -17,6 +17,10 @@ source ./creationTableArmures.sql;
 
 source ./creationTableObjetsMagiques.sql;
 
--- Creation de la base des fiches de personnage
+-- Creation de la table des fiches de personnage
 
 source ./creationTableFichePersonnage.sql
+
+-- Création de la table des objets divers
+
+source ./creationTableObjetsDivers.sql

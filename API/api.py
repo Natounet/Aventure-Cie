@@ -272,7 +272,7 @@ async def creerArmure(armure: Armure) -> list:
     return []
 
 @app.post("/ajout/objetMagique")
-def creerObjetMagique(objetMagique: classes.objetMagique):
+def creerObjetMagique(objetMagique: classes.objetMagique) -> list:
 
     """ Route permettant de créer un objet magique dans la base de données 
 
@@ -289,8 +289,9 @@ def creerObjetMagique(objetMagique: classes.objetMagique):
             * caracteristique: str # Caracteristique, ex : Puissance
             * typeObjet: str # Type de l'objet magique exemple : lunette, bottes, ...
             * nomBalise: Union[str, None] # nom du don lié à l'objet ( peut ne pas être donné)
-        
-    
+
+            Retourne une liste d'erreurs ( vide si pas d'erreurs)
+
     """
 
 
@@ -384,6 +385,58 @@ def creerObjetMagique(objetMagique: classes.objetMagique):
     log(f"Caracteristique de l'objet magique: {objetMagique.caracteristique}")
     log(f"Type de l'objet magique: {objetMagique.typeObjet}")
     log(f"nomBalise de l'objet magique: {objetMagique.nomBalise}")
+    log("")
+
+    return []
+
+@app.post("/ajout/objetDivers")
+async def creerObjetDivers(objetdiv: classes.objetDivers) -> list:
+    """ Route permettant de créer un objet magique dans la base de données 
+
+    Attributs objet magique:\n
+        * nom: str # nom de l'objet divers
+        * description: Union[str, None] # Dénomination de 'l'objet
+        * prix: Union[float, None] # Description de l'objet
+        * taille: float # Prix de l'objet
+        * poids: float # Poids de l'objet
+        * armure: Union[int, None] # Points d'armure dans des cas précis
+
+    Retourne une liste d'erreurs ( vide si pas d'erreurs)
+
+    """
+    ### Nettoyage des chaines ###
+
+    objetdiv.nom = sanitizeChaine(objetdiv.nom)
+
+    if objetdiv.description is not None:
+        objetdiv.description = sanitizeChaine(objetdiv.description)
+
+    ### Verification des attributs ###
+
+    messageErreur = verifications(nom=objetdiv.nom, prix=objetdiv.prix,poids=objetdiv.poids,armure=objetdiv.armure)
+
+    if objetdiv.taille <= 0:
+        messageErreur.append("La taille de l'objet doit être positive.")
+    
+    if objetdiv.description is not None:
+        if (not verificationTailleChaine(objetdiv.description,1,1000)):
+            messageErreur.append("La taille de la description doit être comprises entre 1 et 1000 caractères.")
+    
+
+    ### En cas d'erreur ###
+
+    if messageErreur != []:
+        return messageErreur
+
+    ### Sinon création de l'objet divers dans la BDD ###
+
+    log(f"{datetime.now().strftime('%d/%m/%Y %X')} - Creation d'un objet divers")
+    log(f"Nom de l'objet divers: {objetdiv.nom}")
+    log(f"Description de l'objet divers: {objetdiv.description}")
+    log(f"Prix de l'objet divers: {objetdiv.prix}")
+    log(f"Taille de l'objet divers: {objetdiv.taille}")
+    log(f"Poids de l'objet divers: {objetdiv.poids}")
+    log(f"Armure de l'objet divers: {objetdiv.armure}")
     log("")
 
     return []

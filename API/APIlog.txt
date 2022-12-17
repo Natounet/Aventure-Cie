@@ -504,3 +504,59 @@ Caracteristique de l'objet magique: Puissance
 Type de l'objet magique: Lunettes
 nomBalise de l'objet magique: test
 
+17/12/2022 13:29:12 - Creation d'un objet divers
+Nom de l'objet divers: string
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 1.0
+Poids de l'objet divers: 0.0
+Armure de l'objet divers: None
+
+17/12/2022 13:29:12 - Creation d'un objet divers
+Nom de l'objet divers: string
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 1.0
+Poids de l'objet divers: 0.0
+Armure de l'objet divers: None
+
+17/12/2022 13:29:20 - Creation d'un objet divers
+Nom de l'objet divers: string
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 1.0
+Poids de l'objet divers: 0.0
+Armure de l'objet divers: None
+
+17/12/2022 13:29:26 - Creation d'un objet divers
+Nom de l'objet divers: string
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 0.1
+Poids de l'objet divers: 0.0
+Armure de l'objet divers: None
+
+17/12/2022 13:29:32 - Creation d'un objet divers
+Nom de l'objet divers: string
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 0.1
+Poids de l'objet divers: -2.0
+Armure de l'objet divers: None
+
+17/12/2022 13:29:46 - Creation d'un objet divers
+Nom de l'objet divers: string
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 0.1
+Poids de l'objet divers: -2.0
+Armure de l'objet divers: None
+
+17/12/2022 13:30:05 - Creation d'un objet divers
+Nom de l'objet divers: string
+Description de l'objet divers: None
+Prix de l'objet divers: None
+Taille de l'objet divers: 0.1
+Poids de l'objet divers: 0.1
+Armure de l'objet divers: None
+

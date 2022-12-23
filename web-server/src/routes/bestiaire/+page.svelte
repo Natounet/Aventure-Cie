@@ -1,13 +1,81 @@
 <script>
- function focusSearchBar(e) {
-    if (window.innerWidth < 640) {
-        e.target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})        
+    import Checkbox from "./checkbox.svelte";
+    import { fade } from "svelte/transition";
+    import {Arme, Armure, Don, FichePersonnage, ObjetMagique, ObjetDivers} from "/src/typesAnnuaire.js"
+    import {PlageNumeraire} from "./filtre.js"
+    import DoubleSlider from "./DoubleSlider.svelte";
+
+    let researchMade = false
+
+    $: filtres = {
+        Arme: {
+            prix: new PlageNumeraire(false, "Prix", 0, 100),
+            poids: new PlageNumeraire(false, "Poids (kg)", 0, 100),
+        },
+        Armure: {},
+        Don: {},
+        FichePersonnage: {},
+        ObjetMagique: {}
     }
 
-    if (e.keyCode == 13) {
-        e.target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+    function passeFiltre(filtres, item) {
+        for (let attribut in filtres[item.constructor.name]) { 
+            //item.constructor.name c'est le nom de la classe dont item est une
+            //instance
+            const filtre = filtres[item.constructor.name][attribut]
+            console.log(filtre.actif)
+            if (filtre.actif && !filtre.tester(item[attribut])) return false;
+        }
+        return true;
     }
- }
+
+    function filtrerItems(items, filtres) {
+        let result = items.filter(item => {
+            return passeFiltre(filtres, item)
+        })
+        return result
+    }
+
+    let itemTypes = {
+        Arme: {
+            filterThisType: false,
+            typeName: Arme.name
+        },
+        Armure:{
+            filterThisType: false,
+            typeName: Armure.name
+        },
+        Don: {
+            filterThisType: false,
+            typeName: Don.name
+        },
+        FichePersonnage :{
+            filterThisType: false,
+            typeName: FichePersonnage.name
+        },
+        ObjetMagique : {
+            filterThisType: false,
+            typeName: ObjetMagique.name
+        },
+        ObjetDivers : {
+            filterThisType: false,
+            typeName: ObjetDivers.name
+        }
+    }                      
+
+    const toutLesItems = [new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null)];
+    $: itemFiltree = filtrerItems(toutLesItems, filtres);
+
+    function focusSearchBar(e) {
+        researchMade = true;
+        if (window.innerWidth < 640) {
+            e.target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})        
+        }
+
+        if (e.keyCode == 13) {
+            e.target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+        }
+    }
 </script>
 
 <main>
@@ -30,10 +98,76 @@
                 alt="loupe">
             </div>
         </div>
-
     </section>
 
-    <section class="h-[100vh]">
+    {#if researchMade}
+        <section class="h-[100vh] bg-primary-light">
+            <div 
+            class="w-full [&>*]:my-[2vh] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 justify-items-center">
+                {#each Object.keys(itemTypes) as itemType, index}
+                    <Checkbox delay={index *100 + 500} bind:checked={itemTypes[itemType].filterThisType}>
+                        {itemTypes[itemType].typeName}
+                    </Checkbox>
+                {/each}
+            </div>
+            <div>
+                {#each Object.keys(filtres) as itemType, index}
+                    {#if itemTypes[itemType].filterThisType}
+                        <div class="bg-white w-[96vw] rounded-[3vh] p-[3vh] mx-auto my-[3vh]">
+                            <h1 class="font-fredoka text-xl bg-primary-dark text-white rounded-[3vh] text-center mb-[3vh]">
+                                {itemTypes[itemType].typeName}
+                            </h1>
 
-    </section>
+                            {#each Object.keys(filtres[itemType]) as attribute_name}
+                                <div class="w-full flex items-center justify-between"
+                                style:filter={
+                                    filtres[itemType][attribute_name].actif ? 
+                                    "saturate(1) opacity(1)" 
+                                    : "saturate(0) opacity(0.5)"
+                                }>
+                                    
+                                    <div class="flex items-center cursor-pointer"
+                                    on:click={() => filtres[itemType][attribute_name].actif = !filtres[itemType][attribute_name].actif}
+                                    on:keydown={() => filtres[itemType][attribute_name].actif = !filtres[itemType][attribute_name].actif}>
+                                        {#if filtres[itemType][attribute_name].actif}
+                                            <img src="/checked_dark.svg" 
+                                            alt=""
+                                            class="w-[3vh] h-[3vh] mr-[2vh]">
+                                        {:else} 
+                                            <img src="/uncheck_dark.svg" 
+                                            alt=""
+                                            class="w-[3vh] h-[3vh] mr-[2vh]">
+                                        {/if}
+                                        <p 
+                                        class="bg-white z-10 relative mr-[3vh] font-fredoka">
+                                            {filtres[itemType][attribute_name].name + " : "}
+                                        </p>
+                                    </div>
+                                    {#if filtres[itemType][attribute_name] instanceof PlageNumeraire}
+                                        <DoubleSlider 
+                                            min={filtres[itemType][attribute_name].min} 
+                                            max={filtres[itemType][attribute_name].max}
+                                            bind:borneInfVal={filtres[itemType][attribute_name].borneInf}
+                                            bind:borneSupVal={filtres[itemType][attribute_name].borneSup}
+                                        ></DoubleSlider>
+                                    {/if}
+
+                                    
+                                </div>  
+                            {/each}
+                        </div>
+                    {/if}
+                {/each} 
+            </div>
+        </section>
+        <section>
+            <p>{itemFiltree}</p>
+            {#each itemFiltree as item}
+                <p>{item.prix}</p>
+            {/each}
+        </section>
+    
+    {/if}
+
+    
 </main>

@@ -1,0 +1,1 @@
+export const ACCENT_BLUE = "#6BCDE2"

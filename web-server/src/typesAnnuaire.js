@@ -11,7 +11,11 @@
  * TODO : ajouter des methodes parse/jsonify pour convertir entre json et objet
  */
 
-class Armes {
+import { PlageNumeraire } from "./routes/bestiaire/filtre"
+
+export class Arme {
+    static name = "Arme"
+
     /**
      * 
      * @param {number} id ID unique de l'arme
@@ -56,7 +60,9 @@ class Armes {
     }
 }
 
-class Armures {
+export class Armure {
+    static name = "Armure"
+    
     /**
      * 
      * @param {number} id Id de l'armure
@@ -95,7 +101,9 @@ class Armures {
     } 
 }
 
-class Dons {
+export class Don {
+    static name = "Don"
+    
     /**
      * 
      * @param {string} nomBalise  id/nom du don
@@ -116,7 +124,7 @@ class Dons {
     }
 }
 
-class CaracteristiquePersonnage {
+export class CaracteristiquePersonnage {
     /**
      * 
      * @param {number} puissance /100
@@ -146,7 +154,9 @@ class CaracteristiquePersonnage {
     }
 }
 
-class FichePersonnage {
+export class FichePersonnage {
+    static name = "Créature"
+    
     /**
      * 
      * @param {number} id 
@@ -219,7 +229,9 @@ class FichePersonnage {
     }
 }
 
-class ObjetMagique {
+export class ObjetMagique {
+    static name = "Objet Magique"
+    
     /**
      * 
      * @param {number} id 
@@ -264,5 +276,37 @@ class ObjetMagique {
         this.caracteristique = caracteristique
         this.typeObjet = typeObjet
         this.nomBalise = nomBalise
+    }
+}
+
+export class ObjetDivers {
+    static name = "Objets"
+    
+    /**
+     * 
+     * @param {Number} id 
+     * @param {string} nom 
+     * @param {string|null} description 
+     * @param {Number|null} prix 
+     * @param {Number} taille 
+     * @param {Number} poids 
+     * @param {Number|null} armure 
+     */
+    constructor(
+        id,
+        nom,
+        description,
+        prix,
+        taille,
+        poids,
+        armure
+    ) {
+        this.id = id
+        this.nom = nom
+        this.description = description
+        this.prix = prix
+        this.taille = taille
+        this.poids = poids
+        this.armure = armure
     }
 }

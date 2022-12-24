@@ -1,6 +1,11 @@
 <script>
     export let min = 0
     export let max = 100
+    
+    import { createEventDispatcher } from 'svelte';
+
+    const dipatch = createEventDispatcher();
+
 
     const LARGEUR_RELATIVE = 0.3;
     let largeurPixel = window.innerWidth * LARGEUR_RELATIVE;
@@ -34,10 +39,12 @@
         if (borneInfBouge) {
             borneInfVal += e.movementX * max / largeurPixel
             enfermerBorneInf()
+            dipatch("change")
         }
         if (borneSupBouge) {
             borneSupVal += e.movementX * max / largeurPixel
             enfermerBorneSup()
+            dipatch("change")
         }
     }
 

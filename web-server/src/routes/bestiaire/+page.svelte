@@ -1,9 +1,12 @@
 <script>
     import Checkbox from "./checkbox.svelte";
+    import { cubicOut } from "svelte/easing";
     import { fade } from "svelte/transition";
     import {Arme, Armure, Don, FichePersonnage, ObjetMagique, ObjetDivers} from "/src/typesAnnuaire.js"
     import {PlageNumeraire} from "./filtre.js"
     import DoubleSlider from "./DoubleSlider.svelte";
+    import ItemCard from "./itemCard.svelte";
+    import { slide } from 'svelte/transition';
 
     let researchMade = false
 
@@ -11,12 +14,16 @@
         Arme: {
             prix: new PlageNumeraire(false, "Prix", 0, 100),
             poids: new PlageNumeraire(false, "Poids (kg)", 0, 100),
+            portee: new PlageNumeraire(false, "Portée (m)", 0, 4),
+            armure: new PlageNumeraire(false, "Armure", 0, 10)
         },
         Armure: {},
         Don: {},
         FichePersonnage: {},
         ObjetMagique: {}
     }
+
+
 
     function passeFiltre(filtres, item) {
         for (let attribut in filtres[item.constructor.name]) { 
@@ -63,7 +70,15 @@
         }
     }                      
 
-    const toutLesItems = [new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null)];
+    const toutLesItems = [
+        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
+        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
+        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
+        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
+        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
+        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
+        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null)
+    ];
     $: itemFiltree = filtrerItems(toutLesItems, filtres);
 
     function focusSearchBar(e) {
@@ -101,7 +116,7 @@
     </section>
 
     {#if researchMade}
-        <section class="h-[100vh] bg-primary-light">
+        <section class="py-[2vh] bg-primary-light">
             <div 
             class="w-full [&>*]:my-[2vh] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 justify-items-center">
                 {#each Object.keys(itemTypes) as itemType, index}
@@ -113,7 +128,8 @@
             <div>
                 {#each Object.keys(filtres) as itemType, index}
                     {#if itemTypes[itemType].filterThisType}
-                        <div class="bg-white w-[96vw] rounded-[3vh] p-[3vh] mx-auto my-[3vh]">
+                        <div class="bg-white w-[96vw] rounded-[3vh] p-[3vh] mx-auto my-[3vh]"
+                        transition:slide="{{duration: 100, easing: cubicOut}}">
                             <h1 class="font-fredoka text-xl bg-primary-dark text-white rounded-[3vh] text-center mb-[3vh]">
                                 {itemTypes[itemType].typeName}
                             </h1>
@@ -149,6 +165,11 @@
                                             max={filtres[itemType][attribute_name].max}
                                             bind:borneInfVal={filtres[itemType][attribute_name].borneInf}
                                             bind:borneSupVal={filtres[itemType][attribute_name].borneSup}
+                                            on:change={() => {
+                                                if (!filtres[itemType][attribute_name].actif) filtres[itemType][attribute_name].actif = true
+                                                window.getSelection().empty();
+                                                window.getSelection().removeAllRanges();
+                                            }}
                                         ></DoubleSlider>
                                     {/if}
 
@@ -160,10 +181,15 @@
                 {/each} 
             </div>
         </section>
-        <section>
-            <p>{itemFiltree}</p>
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center py-[2vh]">
             {#each itemFiltree as item}
-                <p>{item.prix}</p>
+                <div class="mb-[2vh]">
+                    <ItemCard imgSrc="/épée.png" 
+                    nom={item.nom} 
+                    mainAttributes={Object.keys(filtres[item.constructor.name]).slice(0, 3).map(filt => filtres[item.constructor.name][filt].name + " : " + item[filt])} >
+                    </ItemCard>
+                </div>
+                
             {/each}
         </section>
     

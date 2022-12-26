@@ -310,3 +310,28 @@ export class ObjetDivers {
         this.armure = armure
     }
 }
+
+/**
+ * Associe les identifiant des attributs des différents types
+ * d'item au nom de cet attribut. Par exemple, l'attribut 
+ * "pointVie" a pour nom "Points de Vie".
+ * Si un attribut n'est pas dans la table, c'est que
+ * que son identifiants est son nom. Par exemple "age" à comme 
+ * nom "age".
+ */
+export const attributesNames = {
+    "id" : "identifiant",
+    "critique": "Multiplicateur Critique",
+    "nomBalise": "Don associé",
+    "malusArmure" : "Malus d'armure",
+    "pointVie": "Points de Vie",
+    "pointPsyche": "Point de Psychée",
+    "positionBase": "Position par défault",
+    "competences": "Compétences",
+    "lootPossible": "Loots Possibles",
+    "equipement": "Equipement",
+    "facteurPuissance": "Facteur de puissance",
+    "coutPsyche": "Cout en psychée",
+    "coutVie": "Cout en vie",
+    "typeObjet": "Type d'objet",
+}

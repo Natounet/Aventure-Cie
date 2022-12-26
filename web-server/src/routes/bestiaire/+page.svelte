@@ -7,6 +7,9 @@
     import DoubleSlider from "./DoubleSlider.svelte";
     import ItemCard from "./itemCard.svelte";
     import { slide } from 'svelte/transition';
+    import { goto } from "$app/navigation";
+
+    export let data;
 
     let researchMade = false
 
@@ -21,9 +24,7 @@
         Don: {},
         FichePersonnage: {},
         ObjetMagique: {}
-    }
-
-
+    }   
 
     function passeFiltre(filtres, item) {
         for (let attribut in filtres[item.constructor.name]) { 
@@ -70,15 +71,7 @@
         }
     }                      
 
-    const toutLesItems = [
-        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
-        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
-        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
-        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
-        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
-        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null),
-        new Arme(1, "épée", "super épée", 10.0, 1, 10, "dé 8", 10, 1, "puissance", "épée lourdes", null)
-    ];
+    let toutLesItems = data.toutLesItems;
     $: itemFiltree = filtrerItems(toutLesItems, filtres);
 
     function focusSearchBar(e) {
@@ -184,9 +177,12 @@
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center py-[2vh]">
             {#each itemFiltree as item}
                 <div class="mb-[2vh]">
-                    <ItemCard imgSrc="/épée.png" 
+                    <ItemCard 
+                    id={item.id}
+                    imgSrc="/épée.png" 
                     nom={item.nom} 
-                    mainAttributes={Object.keys(filtres[item.constructor.name]).slice(0, 3).map(filt => filtres[item.constructor.name][filt].name + " : " + item[filt])} >
+                    mainAttributes={Object.keys(filtres[item.constructor.name]).slice(0, 3).map(filt => filtres[item.constructor.name][filt].name + " : " + item[filt])} 
+                    >
                     </ItemCard>
                 </div>
                 

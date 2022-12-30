@@ -47,27 +47,27 @@
     let itemTypes = {
         Arme: {
             filterThisType: false,
-            typeName: Arme.name
+            typeName: Arme.nomType
         },
         Armure:{
             filterThisType: false,
-            typeName: Armure.name
+            typeName: Armure.nomType
         },
         Don: {
             filterThisType: false,
-            typeName: Don.name
+            typeName: Don.nomType
         },
         FichePersonnage :{
             filterThisType: false,
-            typeName: FichePersonnage.name
+            typeName: FichePersonnage.nomType
         },
         ObjetMagique : {
             filterThisType: false,
-            typeName: ObjetMagique.name
+            typeName: ObjetMagique.nomType
         },
         ObjetDivers : {
             filterThisType: false,
-            typeName: ObjetDivers.name
+            typeName: ObjetDivers.nomType
         }
     }                      
 

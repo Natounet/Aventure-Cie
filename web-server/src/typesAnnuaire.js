@@ -14,13 +14,13 @@
 import { PlageNumeraire } from "./routes/bestiaire/filtre"
 
 export class Arme {
-    static name = "Arme"
+    static nomType = "Arme"
 
     /**
      * 
      * @param {number} id ID unique de l'arme
      * @param {string} nom nom de l'arme, il peut y avoir plusieurs dagues avec des caractéristiques différentes
-     * @param {(string|null)} descritption Description de l'arme, pas obligatoire
+     * @param {(string|null)} description Description de l'arme, pas obligatoire
      * @param {number} prix prix de l'arme, nul si exemple, objet légendaire
      * @param {number} critique multiplicateur de coup critique ? 
      * @param {number} portee portée de l'arme en metres
@@ -34,7 +34,7 @@ export class Arme {
     constructor(
         id,
         nom,
-        descritption,
+        description,
         prix,
         critique,
         portee,
@@ -46,8 +46,9 @@ export class Arme {
         nomBalise
     ) {
         this.id = id
+        this.nomType = Arme.nomType;
         this.nom = nom
-        this.descritption = descritption
+        this.description = description
         this.prix = prix
         this.critique = critique
         this.portee = portee
@@ -61,13 +62,13 @@ export class Arme {
 }
 
 export class Armure {
-    static name = "Armure"
+    static nomType = "Armure"
     
     /**
      * 
      * @param {number} id Id de l'armure
      * @param {string} nom  Nom de l'armure ( pas unique )
-     * @param {string} descritption Description de l'armure
+     * @param {string} description Description de l'armure
      * @param {(number | null)} prix Prix de l'armure ( peut être null dans le cas d'une armure spéciale/légendaire)
      * @param {number} poids Poids de l'armure en kilo
      * @param {number} armure Points d'armure 
@@ -79,7 +80,7 @@ export class Armure {
     constructor(
         id,
         nom,
-        descritption,
+        description,
         prix,
         poids,
         armure,
@@ -89,8 +90,9 @@ export class Armure {
         nomBalise
     ){
         this.id = id
+        this.nomType = Armure.nomType;
         this.nom = nom
-        this.descritption = descritption
+        this.description = description
         this.prix = prix
         this.poids = poids
         this.armure = armure
@@ -102,7 +104,7 @@ export class Armure {
 }
 
 export class Don {
-    static name = "Don"
+    static nomType = "Don"
     
     /**
      * 
@@ -118,6 +120,7 @@ export class Don {
         histoire
     ) {
         this.nomBalise = nomBalise
+        this.nomType = Don.nomType;
         this.nom = nom
         this.caracteristique = caracteristique
         this.histoire = histoire
@@ -155,7 +158,7 @@ export class CaracteristiquePersonnage {
 }
 
 export class FichePersonnage {
-    static name = "Créature"
+    static nomType = "Créature"
     
     /**
      * 
@@ -202,10 +205,11 @@ export class FichePersonnage {
         equipement,
         facteurPuissance,
         dons,
-        descritption,
+        description,
         image
     ) {
         this.id = id 
+        this.nomType = FichePersonnage.nomType;
         this.nom = nom
         this.langue = langue
         this.taille = taille
@@ -224,13 +228,13 @@ export class FichePersonnage {
         this.equipement = equipement
         this.facteurPuissance = facteurPuissance
         this.dons = dons
-        this.descritption = descritption
+        this.description = description
         this.image = image
     }
 }
 
 export class ObjetMagique {
-    static name = "Objet Magique"
+    static nomType = "Objet Magique"
     
     /**
      * 
@@ -264,6 +268,7 @@ export class ObjetMagique {
         nomBalise
     ) {
         this.id = id
+        this.nomType = ObjetMagique.nomType;
         this.nom = nom
         this.description = description
         this.prix = prix
@@ -280,7 +285,7 @@ export class ObjetMagique {
 }
 
 export class ObjetDivers {
-    static name = "Objets"
+    static nomType = "Objets"
     
     /**
      * 
@@ -302,6 +307,7 @@ export class ObjetDivers {
         armure
     ) {
         this.id = id
+        this.nomType = ObjetDivers.nomType;
         this.nom = nom
         this.description = description
         this.prix = prix
@@ -319,19 +325,19 @@ export class ObjetDivers {
  * que son identifiants est son nom. Par exemple "age" à comme 
  * nom "age".
  */
-export const attributesNames = {
-    "id" : "identifiant",
-    "critique": "Multiplicateur Critique",
-    "nomBalise": "Don associé",
-    "malusArmure" : "Malus d'armure",
-    "pointVie": "Points de Vie",
-    "pointPsyche": "Point de Psychée",
-    "positionBase": "Position par défault",
-    "competences": "Compétences",
-    "lootPossible": "Loots Possibles",
-    "equipement": "Equipement",
-    "facteurPuissance": "Facteur de puissance",
-    "coutPsyche": "Cout en psychée",
-    "coutVie": "Cout en vie",
-    "typeObjet": "Type d'objet",
-}
+// export const attributesnomTypes = {
+//     "id" : "identifiant",
+//     "critique": "Multiplicateur Critique",
+//     "nomBalise": "Don associé",
+//     "malusArmure" : "Malus d'armure",
+//     "pointVie": "Points de Vie",
+//     "pointPsyche": "Point de Psychée",
+//     "positionBase": "Position par défault",
+//     "competences": "Compétences",
+//     "lootPossible": "Loots Possibles",
+//     "equipement": "Equipement",
+//     "facteurPuissance": "Facteur de puissance",
+//     "coutPsyche": "Cout en psychée",
+//     "coutVie": "Cout en vie",
+//     "typeObjet": "Type d'objet",
+// }

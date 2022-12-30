@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
+  important: true,
   theme: {
     extend: {
       colors: {
@@ -14,11 +15,15 @@ module.exports = {
       },
       dropShadow: {
         "card": "0 3vh 3vh rgba(12, 18, 45, 0.25)",
+        "page": "0 0 3vh rgba(12, 18, 45, 0.25)",
         "card-huge": "0 0vh 50vh rgba(12, 18, 45, 0.75)",
         "checkbox": "0 0 1vh rgba(12, 18, 45, 0.25)",
         "checkbox-blue": "0 0 1vh rgba(107, 205, 226, 0.25)",
         "checkbox-text": "0 0 0.5vh white",
-      }
+      },
+      aspectRatio: {
+        'A4': '1 / 1.41',
+      },
     },
   },
   plugins: [],

@@ -108,18 +108,18 @@ export class Don {
     
     /**
      * 
-     * @param {string} nomBalise  id/nom du don
+     * @param {number} id  id/nom du don
      * @param {string} nom Nom du don, ne peut pas être nul 30 caractères max, unique
      * @param {string} caracteristique une seule caractéristique ( ex puissance )
      * @param {string} histoire histoire du don 
      */
     constructor(
-        nomBalise,
+        id,
         nom,
         caracteristique,
         histoire
     ) {
-        this.nomBalise = nomBalise
+        this.id = id
         this.nomType = Don.nomType;
         this.nom = nom
         this.caracteristique = caracteristique
